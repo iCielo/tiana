@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+		http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+		http://www.springframework.org/schema/mvc  http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd 
+		http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+	default-autowire="byName">
+
+	<mvc:annotation-driven />
+	<context:component-scan base-package="com.lezic.*" />
+
+	<!-- properties文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	
+	<!-- 数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 配置连接池的初始值 -->
+		<property name="initialSize" value="1" />
+		<!-- 连接池的最大值 -->
+		<!-- <property name="maxActive" value="500"/> -->
+		<!-- 最大空闲时，当经过一个高峰之后，连接池可以将一些用不到的连接释放，一直减少到maxIdle为止 -->
+		<!-- <property name="maxIdle" value="2"/> -->
+		<property name="minIdle" value="1" />
+		<property name="maxActive" value="100" />
+		<property name="maxIdle" value="20" />
+		<property name="maxWait" value="1000" />
+	</bean>
+
+	<!--创建Spring的SessionFactory工厂 -->
+	<!-- 如果使用的是Annotation的方式，不能使用LocalSessionFactoryBean,而应该使用 org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<!-- 注入数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 设置Spring取那个包中查找相应的实体类 -->
+		<property name="packagesToScan" value="com.lezic.tiana.app.entity.*" />
+		<property name="hibernateProperties">
+			<!-- <value> hibernate.dialect=org.hibernate.dialect.HSQLDialect </value> -->
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.format_sql">false</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- MyBatis的SqlSessionFactory配置 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="plugins">
+			<list>
+				<ref bean="pageHelper" />
+				<ref bean="statementInterceptor" />
+			</list>
+		</property>
+		<property name="configLocation" value="classpath:/mybatis/mybatis-sqlmap.xml" />
+	</bean>
+
+	<!-- MyBatis分页插件 -->
+	<bean id="pageHelper" class="com.github.pagehelper.PageHelper">
+		<property name="properties">
+          <value>
+            dialect=hsqldb
+            rowBoundsWithCount=true
+            pageSizeZero=true
+            reasonable=false
+          </value>
+        </property>
+	</bean>
+
+	<!-- 开启HibernateTemplate，并且为其注入SessionFactory 使用HibernateTemplate不太方便的就是要获取session得通过getSessionFactory()方法获取 -->
+	<!-- <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate"> <property name="sessionFactory" 
+		ref="sessionFactory" /> </bean> -->
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+</beans>
