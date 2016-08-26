@@ -18,9 +18,7 @@
 	<modules>
 		<module>tiana-dao</module>
 		<module>tiana-common</module>
-		<module>tiana-cache</module>
 		<module>tiana-web</module>
-		<module>tiana-intf</module>
 		<module>tiana-api</module>
 	</modules>
 	<dependencyManagement>
