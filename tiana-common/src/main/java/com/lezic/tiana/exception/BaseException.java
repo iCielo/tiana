@@ -5,6 +5,8 @@
  */
 package com.lezic.tiana.exception;
 
+import com.lezic.tiana.constant.StatusCode;
+
 /**
  * 异常基类
  * 
@@ -18,13 +20,13 @@ public class BaseException extends RuntimeException {
     /**
      * 错误代码
      */
-    private ErrCode errCode;
+    private StatusCode errCode;
 
     public BaseException() {
         super();
     }
 
-    public BaseException(ErrCode errCode) {
+    public BaseException(StatusCode errCode) {
         super(errCode.getMsg());
         this.errCode = errCode;
     }
@@ -48,11 +50,11 @@ public class BaseException extends RuntimeException {
         // TODO Auto-generated constructor stub
     }
 
-    public ErrCode getErrCode() {
+    public StatusCode getErrCode() {
         return errCode;
     }
 
-    public void setErrCode(ErrCode errCode) {
+    public void setErrCode(StatusCode errCode) {
         this.errCode = errCode;
     }
     

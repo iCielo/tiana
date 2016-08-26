@@ -60,4 +60,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<!-- swagger -->
+	<bean id="springSwaggerConfig" class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" />
+	<mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger/"/>
 </beans>
