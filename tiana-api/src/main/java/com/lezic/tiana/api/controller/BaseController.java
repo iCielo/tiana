@@ -2,7 +2,7 @@
  * <p>Author		:	cielo</p>
  * <p>Date 			: 	2015 下午1:52:24</p>
  */
-package com.lezic.tiana.api;
+package com.lezic.tiana.api.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;

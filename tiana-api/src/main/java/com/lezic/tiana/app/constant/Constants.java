@@ -1,4 +1,4 @@
-package com.lezic.tiana.api.constant;
+package com.lezic.tiana.app.constant;
 
 /**
  * 常量定义

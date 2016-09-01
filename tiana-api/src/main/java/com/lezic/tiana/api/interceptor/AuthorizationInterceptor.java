@@ -11,10 +11,10 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.lezic.tiana.api.annotation.Authorization;
-import com.lezic.tiana.api.constant.Constants;
 import com.lezic.tiana.api.service.TokenService;
 import com.lezic.tiana.api.service.WhiteIPService;
 import com.lezic.tiana.api.vo.Token;
+import com.lezic.tiana.app.constant.Constants;
 import com.lezic.tiana.constant.ResponseData;
 import com.lezic.tiana.constant.StatusCode;
 import com.lezic.tiana.util.ResponseUtil;

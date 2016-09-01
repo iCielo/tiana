@@ -3,7 +3,7 @@
  * 2016年8月26日 下午3:24:52
  * 
  */
-package com.lezic.tiana.api.demo;
+package com.lezic.tiana.app.controller.demo;
 
 import java.io.Serializable;
 

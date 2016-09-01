@@ -3,7 +3,7 @@
  * 2016年8月31日 下午2:41:53
  * 
  */
-package com.lezic.tiana.api;
+package com.lezic.tiana.api.controller;
 
 import java.util.UUID;
 
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lezic.tiana.api.constant.Constants;
 import com.lezic.tiana.api.service.TokenService;
 import com.lezic.tiana.api.vo.Token;
+import com.lezic.tiana.app.constant.Constants;
 import com.lezic.tiana.constant.ResponseData;
 import com.lezic.tiana.constant.StatusCode;
 import com.wordnik.swagger.annotations.ApiOperation;

@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lezic.tiana.api.cache.TokenCache;
-import com.lezic.tiana.api.constant.Constants;
 import com.lezic.tiana.api.vo.Token;
+import com.lezic.tiana.app.constant.Constants;
 
 /**
  * Token服务类

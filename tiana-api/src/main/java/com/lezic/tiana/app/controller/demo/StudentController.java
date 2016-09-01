@@ -3,7 +3,7 @@
  * 2016年8月26日 下午3:20:37
  * 
  */
-package com.lezic.tiana.api.demo;
+package com.lezic.tiana.app.controller.demo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lezic.tiana.api.BaseController;
 import com.lezic.tiana.api.annotation.Authorization;
+import com.lezic.tiana.api.controller.BaseController;
 import com.lezic.tiana.constant.ResponseData;
 import com.lezic.tiana.constant.StatusCode;
 import com.lezic.tiana.util.DataUtil;
