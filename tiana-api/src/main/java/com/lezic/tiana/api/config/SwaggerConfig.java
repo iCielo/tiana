@@ -32,7 +32,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         ApiInfo apiInfo = new ApiInfo("Tiana API", "Tiana的API接口文档", "My Apps API terms of service",
-                "My Apps API Contact Email", "My Apps API Licence Type", "My Apps API License URL");
+                "babytiana@sina.com", "My Apps API Licence Type", "My Apps API License URL");
         return apiInfo;
     }
 }

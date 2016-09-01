@@ -18,7 +18,7 @@ public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    private Integer id;
+    private Long id;
 
     /** 姓名 */
     private String name;
@@ -37,7 +37,7 @@ public class Student implements Serializable {
         super();
     }
 
-    public Student(int id, String name, String sex, int age, String grade) {
+    public Student(Long id, String name, String sex, int age, String grade) {
         super();
         this.id = id;
         this.name = name;
@@ -46,11 +46,11 @@ public class Student implements Serializable {
         this.grade = grade;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
