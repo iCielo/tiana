@@ -7,7 +7,7 @@ package com.lezic.tiana.api.cache;
 
 import org.springframework.stereotype.Component;
 
-import com.lezic.tiana.cache.DefaultCacheImpl;
+import com.lezic.tiana.cache.impl.DefaultCacheImpl;
 
 /**
  * token缓存

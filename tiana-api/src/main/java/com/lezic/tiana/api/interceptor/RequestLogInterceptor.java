@@ -2,7 +2,7 @@
  * <p>Author		:	cielo</p>
  * <p>Date 			: 	2015 下午2:59:46</p>
  */
-package com.lezic.tiana.web.interceptor;
+package com.lezic.tiana.api.interceptor;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -14,7 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.lezic.tiana.web.util.ClientIpUtil;
+import com.lezic.tiana.util.ClientIpUtil;
 
 /**
  * 客户端请求地址、参数的打印拦截器

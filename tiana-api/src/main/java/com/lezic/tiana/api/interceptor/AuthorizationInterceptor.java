@@ -14,10 +14,10 @@ import com.lezic.tiana.api.annotation.Authorization;
 import com.lezic.tiana.api.constant.Constants;
 import com.lezic.tiana.api.service.TokenService;
 import com.lezic.tiana.api.service.WhiteIPService;
-import com.lezic.tiana.api.util.ResponseUtil;
 import com.lezic.tiana.api.vo.Token;
 import com.lezic.tiana.constant.ResponseData;
 import com.lezic.tiana.constant.StatusCode;
+import com.lezic.tiana.util.ResponseUtil;
 
 /**
  * 自定义拦截器，判断此次请求是否有权限

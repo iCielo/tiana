@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.lezic.tiana.cache;
+package com.lezic.tiana.cache.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,6 +16,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.lezic.tiana.cache.ICache;
 
 /**
  * 一个默认的本地Cache的实现，线程安全

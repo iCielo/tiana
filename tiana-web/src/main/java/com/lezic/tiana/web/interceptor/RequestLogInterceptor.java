@@ -14,7 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.lezic.tiana.web.util.ClientIpUtil;
+import com.lezic.tiana.util.ClientIpUtil;
 
 /**
  * 客户端请求地址、参数的打印拦截器

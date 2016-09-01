@@ -6,7 +6,7 @@ package com.lezic.tiana.app.cache;
 
 import org.springframework.stereotype.Component;
 
-import com.lezic.tiana.cache.DefaultCacheImpl;
+import com.lezic.tiana.cache.impl.DefaultCacheImpl;
 
 /**
  * 本地缓存

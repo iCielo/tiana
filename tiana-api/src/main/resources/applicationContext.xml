@@ -65,7 +65,7 @@
 		<!--参数 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**/*" />
-			<bean class="com.lezic.tiana.web.interceptor.RequestLogInterceptor" />
+			<bean class="com.lezic.tiana.api.interceptor.RequestLogInterceptor" />
 		</mvc:interceptor>
 		<!--鉴权 -->
 		<mvc:interceptor>

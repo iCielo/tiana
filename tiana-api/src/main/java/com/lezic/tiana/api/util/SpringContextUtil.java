@@ -3,7 +3,7 @@
  * 2016年8月15日 上午11:19:16
  * 
  */
-package com.lezic.tiana.web.util;
+package com.lezic.tiana.api.util;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
