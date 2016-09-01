@@ -19,7 +19,6 @@ import com.lezic.tiana.api.service.TokenService;
 import com.lezic.tiana.api.vo.Token;
 import com.lezic.tiana.constant.ResponseData;
 import com.lezic.tiana.constant.StatusCode;
-import com.lezic.tiana.web.BaseController;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 
