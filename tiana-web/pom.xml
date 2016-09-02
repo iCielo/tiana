@@ -7,9 +7,9 @@
 		<artifactId>tiana</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>tiana-web</artifactId>
+	<artifactId>tiana-portal</artifactId>
 	<packaging>war</packaging>
-	<name>tiana-web Maven Webapp</name>
+	<name>tiana-portal Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	
 	<dependencies>
@@ -75,6 +75,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>tiana-web</finalName>
+		<finalName>tiana-portal</finalName>
 	</build>
 </project>

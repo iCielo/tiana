@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lezic.tiana.annotation.Log;
 import com.lezic.tiana.api.service.TokenService;
 import com.lezic.tiana.api.vo.Token;
 import com.lezic.tiana.app.constant.Constants;
@@ -46,6 +47,7 @@ public class TokenController extends BaseController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "登录", notes = "登录，获取token")
+    @Log(value = "登录，获取token")
     public ResponseData<String> login(@ApiParam(value = "用户名") @RequestParam String username,
             @ApiParam(value = "密码") @RequestParam String password) {
         
@@ -72,6 +74,7 @@ public class TokenController extends BaseController {
      */
     @RequestMapping(value = "/logout", method = RequestMethod.DELETE)
     @ApiOperation(value = "退出登录", notes = "退出，token失效")
+    @Log(value = "退出，token失效")
     public ResponseData<String> logout() {
         String key = request.getHeader(Constants.TOKEN_KEY);
         tokenService.delToken(key);

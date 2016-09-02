@@ -3,7 +3,7 @@
 
 	<properties>
 		<property name="LOG_HOME">logs</property>
-		<property name="FILE_NAME">tiana-web</property>
+		<property name="FILE_NAME">tiana-portal</property>
 	</properties>
 
 	<Appenders>
