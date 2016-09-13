@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.lezic.tiana.api.cache.TokenCache;
 import com.lezic.tiana.api.vo.Token;
 import com.lezic.tiana.app.constant.Constants;
+import com.lezic.tiana.web.annotation.Log;
 
 /**
  * Token服务类
@@ -43,6 +44,7 @@ public class TokenService {
      * @author lincl
      * @date 2016年8月31日 下午3:50:25
      */
+    @Log("加入缓存")
     public void addToken(Token token) {
         tokenCache.put(token.getKey(), token, Constants.TOKEN_EXPIRES_HOUR);
     }

@@ -32,8 +32,8 @@
 			 * 成功回调方法：再原有的基础上包上一层检测超时、禁止访问等
 			 */
 			success : function(data) {
-				if (data && data.status) {
-					if (data.status == "SUCCESS") {
+				if (data && data.code) {
+					if (data.code == "SUCCESS") {
 						if (typeof (callback) == "function") {
 							callback(data);
 						} else if (data.msg) {
@@ -41,14 +41,6 @@
 						}
 					} else if (data.msg) {
 						MyLayer.alert(data.msg);
-					} else if (data.status == "TIMEOUT") {
-						MyLayer.alert("登录超时！");
-					} else if (data.status == "FORBID") {
-						MyLayer.alert("禁止访问！");
-					} else if (data.status == "FAIL") {
-						MyLayer.alert("操作失败！");
-					} else if (data.status == "ERROR") {
-						MyLayer.alert("出现错误！");
 					}
 				}
 			},

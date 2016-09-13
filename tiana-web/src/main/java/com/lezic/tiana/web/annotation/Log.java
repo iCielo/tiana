@@ -3,7 +3,7 @@
  * 2016年9月12日 下午5:35:45
  * 
  */
-package com.lezic.tiana.annotation;
+package com.lezic.tiana.web.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lezic.tiana.annotation.Log;
 import com.lezic.tiana.api.service.TokenService;
 import com.lezic.tiana.api.vo.Token;
 import com.lezic.tiana.app.constant.Constants;
-import com.lezic.tiana.constant.ResponseData;
+import com.lezic.tiana.constant.BaseData;
+import com.lezic.tiana.constant.SimpleData;
 import com.lezic.tiana.constant.StatusCode;
+import com.lezic.tiana.web.BaseController;
+import com.lezic.tiana.web.annotation.Log;
+import com.wordnik.swagger.annotations.ApiImplicitParam;
+import com.wordnik.swagger.annotations.ApiImplicitParams;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 
@@ -48,7 +52,7 @@ public class TokenController extends BaseController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "登录", notes = "登录，获取token")
     @Log(value = "登录，获取token")
-    public ResponseData<String> login(@ApiParam(value = "用户名") @RequestParam String username,
+    public  SimpleData<String> login(@ApiParam(value = "用户名") @RequestParam String username,
             @ApiParam(value = "密码") @RequestParam String password) {
         
 //        X509Certificate[] cers = (X509Certificate[]) request.getAttribute("javax.servlet.request.X509Certificate");
@@ -59,7 +63,7 @@ public class TokenController extends BaseController {
         token.setUserId(1L);
         token.setKey(UUID.randomUUID() + "");
         tokenService.addToken(token);
-        ResponseData<String> responseData = new ResponseData<String>();
+        SimpleData<String> responseData = new SimpleData<String>();
         responseData.setResult(token.getKey());
         responseData.setMsg("登录成功");
         return responseData;
@@ -75,9 +79,10 @@ public class TokenController extends BaseController {
     @RequestMapping(value = "/logout", method = RequestMethod.DELETE)
     @ApiOperation(value = "退出登录", notes = "退出，token失效")
     @Log(value = "退出，token失效")
-    public ResponseData<String> logout() {
+    @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
+    public BaseData logout() {
         String key = request.getHeader(Constants.TOKEN_KEY);
         tokenService.delToken(key);
-        return new ResponseData<String>(StatusCode.APP_0, "退出登录成功");
+        return new BaseData(StatusCode.SUCCESS, "退出登录成功");
     }
 }

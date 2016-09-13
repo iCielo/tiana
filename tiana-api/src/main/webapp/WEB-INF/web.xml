@@ -47,7 +47,7 @@
 		<param-value>classpath:applicationContext*.xml</param-value>
 	</context-param>
 	<listener>
-		<listener-class>com.lezic.tiana.web.context.CustomContextLoaderListener</listener-class>
+		<listener-class>com.lezic.tiana.api.context.CustomContextLoaderListener</listener-class>
 	</listener>
 	
 	<welcome-file-list>

@@ -10,8 +10,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.context.ContextLoaderListener;
 
-import com.lezic.tiana.api.util.SpringContextUtil;
 import com.lezic.tiana.app.service.sys.SysDictionaryService;
+import com.lezic.tiana.web.util.SpringContextUtil;
 
 /**
  * 系统启动初始化类
@@ -31,10 +31,6 @@ public class CustomContextLoaderListener extends ContextLoaderListener {
         logger.info("开始系统全局参数初始化");
         int i = 1;
 
-        SysDictionaryService sysDictionaryService = (SysDictionaryService) SpringContextUtil
-                .getBean(SysDictionaryService.class);
-        sysDictionaryService.initCache();
-        logger.info((i++) + "：数据字典加载完成！");
     }
 
 }

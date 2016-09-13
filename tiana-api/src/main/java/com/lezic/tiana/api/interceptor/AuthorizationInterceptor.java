@@ -15,9 +15,9 @@ import com.lezic.tiana.api.service.TokenService;
 import com.lezic.tiana.api.service.WhiteIPService;
 import com.lezic.tiana.api.vo.Token;
 import com.lezic.tiana.app.constant.Constants;
-import com.lezic.tiana.constant.ResponseData;
+import com.lezic.tiana.constant.SimpleData;
 import com.lezic.tiana.constant.StatusCode;
-import com.lezic.tiana.util.ResponseUtil;
+import com.lezic.tiana.web.util.ResponseUtil;
 
 /**
  * 自定义拦截器，判断此次请求是否有权限
@@ -59,7 +59,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         String key = request.getHeader(Constants.TOKEN_KEY);
         if (key == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            ResponseUtil.write(response, new ResponseData<String>(StatusCode.HTTP_401, "请先登录"));
+            ResponseUtil.write(response, new SimpleData<String>(StatusCode.HTTP_401, "请先登录"));
             return false;
         }
 
@@ -69,7 +69,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         Method method = handlerMethod.getMethod();
         if (method.getAnnotation(Authorization.class) != null && token == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            ResponseUtil.write(response, new ResponseData<String>(StatusCode.HTTP_401, "token不是有效或已失效"));
+            ResponseUtil.write(response, new SimpleData<String>(StatusCode.HTTP_401, "token不是有效或已失效"));
             return false;
         } else {
             // 更新token有效期

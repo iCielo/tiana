@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.lezic.tiana.orm.Page;
 import com.lezic.tiana.util.DataUtil;
-import com.lezic.tiana.web.constant.Status;
 
 /**
  * 控制器基类
@@ -96,36 +95,6 @@ public abstract class BaseController {
 		} catch (Exception e) {
 			logger.error("系统错误！", e);
 		}
-	}
-
-	/**
-	 * 输出ajax的返回值
-	 * 
-	 * @param status
-	 * @param msg
-	 * @throws IOException
-	 * @author cielo
-	 */
-	public void outMsg(Status status, String msg) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("status", status);
-		map.put("msg", msg);
-		this.write(map);
-	}
-
-	/**
-	 * 输出ajax的返回值
-	 * 
-	 * @param status
-	 * @param data
-	 * @throws IOException
-	 * @author cielo
-	 */
-	public void outData(Status status, Object data) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("status", status);
-		map.put("data", data);
-		this.write(map);
 	}
 
 	/**

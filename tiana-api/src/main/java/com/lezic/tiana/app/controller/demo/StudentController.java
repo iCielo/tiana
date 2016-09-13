@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lezic.tiana.api.annotation.Authorization;
-import com.lezic.tiana.api.controller.BaseController;
-import com.lezic.tiana.constant.ResponseData;
+import com.lezic.tiana.constant.BaseData;
+import com.lezic.tiana.constant.SimpleData;
 import com.lezic.tiana.constant.StatusCode;
 import com.lezic.tiana.util.DataUtil;
+import com.lezic.tiana.web.BaseController;
 import com.wordnik.swagger.annotations.ApiImplicitParam;
 import com.wordnik.swagger.annotations.ApiImplicitParams;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -57,8 +58,8 @@ public class StudentController extends BaseController {
     @ApiOperation(value = "根据学生属性进行搜索", notes = "根据学生属性进行搜索")
     @Authorization
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
-    public ResponseData<List<Student>> list(@RequestBody Student req) {
-        ResponseData<List<Student>> responseData = new ResponseData<List<Student>>();
+    public SimpleData<List<Student>> list(@RequestBody Student req) {
+        SimpleData<List<Student>> responseData = new SimpleData<List<Student>>();
         List<Student> rows = new ArrayList<Student>();
         if (req.getId() == null && req.getName() == null && req.getAge() == null && req.getSex() == null
                 && req.getGrade() == null) {
@@ -103,8 +104,8 @@ public class StudentController extends BaseController {
     @ApiOperation(value = "根据ID主键获取学生", notes = "根据ID主键获取学生")
     @Authorization
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
-    public ResponseData<Student> getStudent(@PathVariable Long id) {
-        ResponseData<Student> responseData = new ResponseData<Student>();
+    public SimpleData<Student> getStudent(@PathVariable Long id) {
+        SimpleData<Student> responseData = new SimpleData<Student>();
         for (Student item : list) {
             if (id == item.getId()) {
                 responseData.setResult(item);
@@ -127,14 +128,14 @@ public class StudentController extends BaseController {
     @ApiOperation(value = "根据ID主键删除学生", notes = "根据ID主键删除学生")
     @Authorization
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
-    public ResponseData<String> delete(@PathVariable Long id) {
+    public BaseData delete(@PathVariable Long id) {
         for (Student item : list) {
             if (id == item.getId()) {
                 list.remove(item);
-                return new ResponseData<String>();
+                return new BaseData();
             }
         }
-        return new ResponseData<String>(StatusCode.APP_1004);
+        return new BaseData(StatusCode.APP_1004);
     }
 
     /**
@@ -147,12 +148,12 @@ public class StudentController extends BaseController {
     @ApiOperation(value = "新增学生实例", notes = "新增学生实例")
     @Authorization
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
-    public ResponseData<Long> add(@ApiParam(value = "姓名") @RequestParam String name,
+    public SimpleData<Long> add(@ApiParam(value = "姓名") @RequestParam String name,
             @ApiParam(value = "性别") @RequestParam String sex, @ApiParam(value = "年龄") @RequestParam Integer age,
             @ApiParam(value = "年级") @RequestParam String grade) {
         Student student = new Student(id++, name, sex, age, grade);
         list.add(student);
-        ResponseData<Long> responseData = new ResponseData<Long>();
+        SimpleData<Long> responseData = new SimpleData<Long>();
         responseData.setResult(student.getId());
         return responseData;
     }
@@ -168,7 +169,7 @@ public class StudentController extends BaseController {
     @ApiOperation(value = "根据ID更新学生实例", notes = "根据ID更新学生实例")
     @Authorization
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
-    public ResponseData<String> update(@ApiParam(value = "姓名") @RequestParam(required = false) String name,
+    public BaseData update(@ApiParam(value = "姓名") @RequestParam(required = false) String name,
             @ApiParam(value = "性别") @RequestParam(required = false) String sex,
             @ApiParam(value = "年龄") @RequestParam(required = false) Integer age,
             @ApiParam(value = "年级") @RequestParam(required = false) String grade, @PathVariable Long id) {
@@ -181,7 +182,7 @@ public class StudentController extends BaseController {
         }
 
         if (entity == null) {
-            return new ResponseData<String>(StatusCode.APP_1004);
+            return new BaseData(StatusCode.APP_1004);
         } else {
             if (DataUtil.isNotNull(name)) {
                 entity.setName(name);
@@ -195,7 +196,7 @@ public class StudentController extends BaseController {
             if (DataUtil.isNotNull(grade)) {
                 entity.setGrade(grade);
             }
-            return new ResponseData<String>();
+            return new BaseData();
         }
     }
 

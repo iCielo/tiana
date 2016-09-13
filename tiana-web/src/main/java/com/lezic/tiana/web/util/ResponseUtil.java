@@ -3,7 +3,7 @@
  * 2016年8月31日 下午4:43:41
  * 
  */
-package com.lezic.tiana.util;
+package com.lezic.tiana.web.util;
 
 import java.io.IOException;
 import java.util.Collection;

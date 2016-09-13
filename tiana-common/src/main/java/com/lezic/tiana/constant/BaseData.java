@@ -1,40 +1,30 @@
 /**
  * lincl
- * 2016年8月31日 下午3:37:34
+ * 2016年9月13日 下午4:38:47
  * 
  */
 package com.lezic.tiana.constant;
 
-
 /**
- * 响应结果数据
+ * 响应结果
  * 
  * @author lincl
  * 
  */
-public class ResponseData<T> {
+public class BaseData {
 
+    /** 编码 */
     private StatusCode code;
 
+    /** 提示消息 */
     private String msg;
 
-    private T result;
-
     /**
      * 构造方法
      */
-    public ResponseData() {
+    public BaseData() {
         super();
-        this.code = StatusCode.APP_0;
-    }
-
-    /**
-     * 构造方法
-     */
-    public ResponseData(T result) {
-        super();
-        this.code = StatusCode.APP_0;
-        this.result = result;
+        this.code = StatusCode.SUCCESS;
     }
 
     /**
@@ -42,7 +32,7 @@ public class ResponseData<T> {
      * 
      * @param code
      */
-    public ResponseData(StatusCode code) {
+    public BaseData(StatusCode code) {
         super();
         this.code = code;
         this.msg = code.getMsg();
@@ -54,7 +44,7 @@ public class ResponseData<T> {
      * @param code
      * @param msg
      */
-    public ResponseData(StatusCode code, String msg) {
+    public BaseData(StatusCode code, String msg) {
         super();
         this.code = code;
         this.msg = msg;
@@ -74,14 +64,6 @@ public class ResponseData<T> {
 
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-    public T getResult() {
-        return result;
-    }
-
-    public void setResult(T result) {
-        this.result = result;
     }
 
 }

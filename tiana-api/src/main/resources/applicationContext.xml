@@ -8,7 +8,12 @@
 		http://www.springframework.org/schema/mvc  http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd 
 		http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
 	default-autowire="byName">
-
+	
+	<!-- 启动对@AspectJ注解的支持 -->
+	<aop:aspectj-autoproxy />
+	<!--通知spring使用cglib而不是jdk的来生成代理方法 AOP可以拦截到Controller -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	
 	<!-- properties文件 -->
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<!-- locations 属性指定属性文件的位置 -->
@@ -65,7 +70,7 @@
 		<!--参数 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**/*" />
-			<bean class="com.lezic.tiana.api.interceptor.RequestLogInterceptor" />
+			<bean class="com.lezic.tiana.web.interceptor.RequestLogInterceptor" />
 		</mvc:interceptor>
 		<!--鉴权 -->
 		<mvc:interceptor>

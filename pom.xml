@@ -20,6 +20,7 @@
 		<module>tiana-common</module>
 		<module>tiana-portal</module>
 		<module>tiana-api</module>
+		<module>tiana-web</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
@@ -37,7 +38,7 @@
 			</dependency>
 			<dependency>
 				<groupId>com.lezic.tiana</groupId>
-				<artifactId>tiana-cache</artifactId>
+				<artifactId>tiana-web</artifactId>
 				<version>${tiana.version}</version>
 			</dependency>
 

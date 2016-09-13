@@ -9,13 +9,17 @@
 	</parent>
 	<artifactId>tiana-api</artifactId>
 	<packaging>war</packaging>
-	<name>tiana-api Maven Webapp</name>
+	<name>tiana-api</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.lezic.tiana</groupId>
+			<artifactId>tiana-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.lezic.tiana</groupId>
@@ -63,7 +67,6 @@
 			<artifactId>swagger-springmvc</artifactId>
 			<version>1.0.2</version>
 		</dependency>
-
 
 	</dependencies>
 	<build>

@@ -2,7 +2,7 @@
  * <p>Author		:	cielo</p>
  * <p>Date 			: 	2015 下午3:20:18</p>
  */
-package com.lezic.tiana.util;
+package com.lezic.tiana.web.util;
 
 import javax.servlet.http.HttpServletRequest;
 

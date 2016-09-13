@@ -5,8 +5,6 @@
 package com.lezic.tiana.web.handle;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +15,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.lezic.tiana.constant.SimpleData;
+import com.lezic.tiana.constant.StatusCode;
 import com.lezic.tiana.util.JsonUtil;
-import com.lezic.tiana.web.constant.Status;
 
 /**
  * Spring MVC 异常统一处理类
@@ -38,18 +37,15 @@ public class BaseHandleExceptionResolver implements HandlerExceptionResolver {
             String ajax = request.getParameter("ajax");
             String msg = ex.getMessage();
             logger.error("系统错误！", ex);
+            SimpleData<String> responseData = new SimpleData<>(StatusCode.APP_9999,msg);
             if ("true".equals(ajax)) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put("status", Status.ERROR);
-                map.put("msg", msg);
                 response.setContentType("application/json");
                 try {
-                    response.getWriter().write(JsonUtil.toString(map));
+                    response.getWriter().write(JsonUtil.toString(responseData));
                 } catch (IOException e) {
                 }
             } else {
-                request.setAttribute("status", Status.ERROR);
-                request.setAttribute("msg", msg);
+                request.setAttribute("responseData", responseData);
                 return new ModelAndView("main/exception");
             }
         }

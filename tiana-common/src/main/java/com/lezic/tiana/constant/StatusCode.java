@@ -14,6 +14,8 @@ import java.io.Serializable;
  * 
  */
 public enum StatusCode implements Serializable {
+    
+    SUCCESS("操作成功"),
 
     /* HTTP返回状态码 */
     /** HTTP 正常 */
@@ -32,7 +34,6 @@ public enum StatusCode implements Serializable {
     HTTP_503("服务不可用"),
 
     /* 业务返回状态码 */
-    APP_0("成功"),
     /** 业务参数缺失 */
     APP_1001("参数缺失"),
     /** 业务参数不合法 */
