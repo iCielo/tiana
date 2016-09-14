@@ -21,6 +21,7 @@ import com.lezic.tiana.constant.SimpleData;
 import com.lezic.tiana.constant.StatusCode;
 import com.lezic.tiana.util.DataUtil;
 import com.lezic.tiana.web.BaseController;
+import com.lezic.tiana.web.annotation.Log;
 import com.wordnik.swagger.annotations.ApiImplicitParam;
 import com.wordnik.swagger.annotations.ApiImplicitParams;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -58,6 +59,7 @@ public class StudentController extends BaseController {
     @ApiOperation(value = "根据学生属性进行搜索", notes = "根据学生属性进行搜索")
     @Authorization
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
+    @Log("根据学生属性进行搜索")
     public SimpleData<List<Student>> list(@RequestBody Student req) {
         SimpleData<List<Student>> responseData = new SimpleData<List<Student>>();
         List<Student> rows = new ArrayList<Student>();
