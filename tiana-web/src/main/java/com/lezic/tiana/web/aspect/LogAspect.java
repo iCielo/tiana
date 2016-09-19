@@ -6,17 +6,21 @@
 package com.lezic.tiana.web.aspect;
 
 import java.lang.reflect.Method;
+import java.util.UUID;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lezic.tiana.util.DataUtil;
 import com.lezic.tiana.util.ReflectionUtil;
 import com.lezic.tiana.web.annotation.Log;
+import com.lezic.tiana.web.cache.LogCache;
+import com.lezic.tiana.web.vo.LogVo;
 
 /**
  * 日志切面
@@ -27,7 +31,11 @@ import com.lezic.tiana.web.annotation.Log;
 @Aspect
 @Component
 public class LogAspect {
+
     private Logger logger = LogManager.getLogger();
+
+    @Autowired
+    private LogCache logCache;
 
     @Around("@annotation(com.lezic.tiana.web.annotation.Log)")
     public Object doAround(ProceedingJoinPoint pjd) throws Throwable {
@@ -55,6 +63,11 @@ public class LogAspect {
         logger.info("CostTime：" + costTime + "ms");
         logger.info("Result：" + result);
         logger.info("------ End：" + log.value());
+
+        // 添加到日志缓存中，由异步进程进行写日志操作
+        LogVo logVo = new LogVo(UUID.randomUUID().toString(), beginTime, log.value(), result, costTime, null);
+        logCache.put(logVo.getClue(), logVo);
+
         return result;
     }
 }
