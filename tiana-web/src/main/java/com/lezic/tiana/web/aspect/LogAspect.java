@@ -20,7 +20,11 @@ import com.lezic.tiana.util.DataUtil;
 import com.lezic.tiana.util.ReflectionUtil;
 import com.lezic.tiana.web.annotation.Log;
 import com.lezic.tiana.web.cache.LogCache;
+<<<<<<< HEAD
 import com.lezic.tiana.web.vo.LogVo;
+=======
+import com.lezic.tiana.web.vo.LogVO;
+>>>>>>> branch 'master' of https://github.com/iCielo/tiana.git
 
 /**
  * 日志切面
@@ -65,7 +69,11 @@ public class LogAspect {
         logger.info("------ End：" + log.value());
 
         // 添加到日志缓存中，由异步进程进行写日志操作
+<<<<<<< HEAD
         LogVo logVo = new LogVo(UUID.randomUUID().toString(), beginTime, log.value(), result, costTime, null);
+=======
+        LogVO logVo = new LogVO(UUID.randomUUID().toString(), beginTime, log.value(), result, costTime, null);
+>>>>>>> branch 'master' of https://github.com/iCielo/tiana.git
         logCache.put(logVo.getClue(), logVo);
 
         return result;

@@ -11,7 +11,7 @@ package com.lezic.tiana.web.vo;
  * @author lincl
  * 
  */
-public class LogVo {
+public class LogVO {
 
     /** 线索 用于标识某次请求 */
     private String clue;
@@ -34,7 +34,7 @@ public class LogVo {
     /**
      * 
      */
-    public LogVo() {
+    public LogVO() {
         super();
     }
 
@@ -46,7 +46,7 @@ public class LogVo {
      * @param costTime
      * @param userId
      */
-    public LogVo(String clue, Long time, String content, Object result, Long costTime, Long userId) {
+    public LogVO(String clue, Long time, String content, Object result, Long costTime, Long userId) {
         super();
         this.clue = clue;
         this.time = time;
