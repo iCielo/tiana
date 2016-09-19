@@ -5,8 +5,6 @@
  */
 package com.lezic.tiana.web.vo;
 
-import java.util.Date;
-
 /**
  * 日志对象
  * 
@@ -15,14 +13,17 @@ import java.util.Date;
  */
 public class LogVO {
 
+    /** 线索 用于标识某次请求 */
+    private String clue;
+
     /** 时间点 */
-    private Date time;
+    private Long time;
 
     /** 内容 */
     private String content;
 
     /** 结果 */
-    private String result;
+    private Object result;
 
     /** 耗时 */
     private Long costTime;
@@ -30,11 +31,36 @@ public class LogVO {
     /** 用户ID */
     private Long userId;
 
-    public Date getTime() {
+    /**
+     * 
+     */
+    public LogVO() {
+        super();
+    }
+
+    /**
+     * @param clue
+     * @param time
+     * @param content
+     * @param result
+     * @param costTime
+     * @param userId
+     */
+    public LogVO(String clue, Long time, String content, Object result, Long costTime, Long userId) {
+        super();
+        this.clue = clue;
+        this.time = time;
+        this.content = content;
+        this.result = result;
+        this.costTime = costTime;
+        this.userId = userId;
+    }
+
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 
@@ -46,11 +72,11 @@ public class LogVO {
         this.content = content;
     }
 
-    public String getResult() {
+    public Object getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(Object result) {
         this.result = result;
     }
 
@@ -68,6 +94,14 @@ public class LogVO {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getClue() {
+        return clue;
+    }
+
+    public void setClue(String clue) {
+        this.clue = clue;
     }
 
 }
