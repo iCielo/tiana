@@ -37,7 +37,7 @@
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        url = "http://localhost:8080/tiana-api/api-docs";
+    	  url = window.location.href.replace(/swagger\/index.html.*/g,"api-docs");
       }
 
       hljs.configure({

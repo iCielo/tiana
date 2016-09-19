@@ -106,6 +106,7 @@ public class StudentController extends BaseController {
     @ApiOperation(value = "根据ID主键获取学生", notes = "根据ID主键获取学生")
     @Authorization
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
+    @Log("根据ID主键获取学生")
     public SimpleData<Student> getStudent(@PathVariable Long id) {
         SimpleData<Student> responseData = new SimpleData<Student>();
         for (Student item : list) {
@@ -130,6 +131,7 @@ public class StudentController extends BaseController {
     @ApiOperation(value = "根据ID主键删除学生", notes = "根据ID主键删除学生")
     @Authorization
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
+    @Log("根据ID主键删除学生")
     public BaseData delete(@PathVariable Long id) {
         for (Student item : list) {
             if (id == item.getId()) {
@@ -150,6 +152,7 @@ public class StudentController extends BaseController {
     @ApiOperation(value = "新增学生实例", notes = "新增学生实例")
     @Authorization
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
+    @Log("新增学生实例")
     public SimpleData<Long> add(@ApiParam(value = "姓名") @RequestParam String name,
             @ApiParam(value = "性别") @RequestParam String sex, @ApiParam(value = "年龄") @RequestParam Integer age,
             @ApiParam(value = "年级") @RequestParam String grade) {
@@ -171,6 +174,7 @@ public class StudentController extends BaseController {
     @ApiOperation(value = "根据ID更新学生实例", notes = "根据ID更新学生实例")
     @Authorization
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
+    @Log("根据ID更新学生实例")
     public BaseData update(@ApiParam(value = "姓名") @RequestParam(required = false) String name,
             @ApiParam(value = "性别") @RequestParam(required = false) String sex,
             @ApiParam(value = "年龄") @RequestParam(required = false) Integer age,

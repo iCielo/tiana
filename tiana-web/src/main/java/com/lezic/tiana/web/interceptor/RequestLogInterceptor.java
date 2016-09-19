@@ -6,6 +6,7 @@ package com.lezic.tiana.web.interceptor;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +38,7 @@ public class RequestLogInterceptor extends HandlerInterceptorAdapter {
         // logger.info("Request userID：" + SessionParams.getUserId());
         logger.info("Request url : " + request.getRequestURL());
         logger.info("Client ip : " + ClientIpUtil.getRemoteAddr(request));
+//        logger.info("Request ID：" + UUID.randomUUID().toString());
         if (it.hasNext()) {
             logger.debug("------");
             while (it.hasNext()) {

@@ -104,4 +104,10 @@ public class LogVo {
         this.clue = clue;
     }
 
+    @Override
+    public String toString() {
+        return "LogVo [clue=" + clue + ", time=" + time + ", content=" + content + ", result=" + result + ", costTime="
+                + costTime + ", userId=" + userId + "]";
+    }
+
 }

@@ -66,4 +66,9 @@ public class BaseData {
         this.msg = msg;
     }
 
+    @Override
+    public String toString() {
+        return "BaseData [code=" + code + ", msg=" + msg + "]";
+    }
+
 }

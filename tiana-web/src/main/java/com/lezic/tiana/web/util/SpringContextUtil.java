@@ -48,9 +48,10 @@ public class SpringContextUtil {
      * @param cl
      * @return
      * @author cielo
+     * @param <T>
      */
-    public static Object getBean(Class<?> cl) {
-        return webApplicationContext.getBean(cl);
+    public static <T> T getBean(Class<T> cl) {
+        return (T) webApplicationContext.getBean(cl);
     }
 
     /**

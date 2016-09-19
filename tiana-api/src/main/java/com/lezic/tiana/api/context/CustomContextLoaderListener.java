@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.web.context.ContextLoaderListener;
 
 import com.lezic.tiana.app.service.sys.SysDictionaryService;
+import com.lezic.tiana.web.task.LogTask;
 import com.lezic.tiana.web.util.SpringContextUtil;
 
 /**
@@ -31,6 +32,9 @@ public class CustomContextLoaderListener extends ContextLoaderListener {
         logger.info("开始系统全局参数初始化");
         int i = 1;
 
+        logger.info((i++) + ".初始化系统日志AOP");
+        LogTask logTask = (LogTask) SpringContextUtil.getBean(LogTask.class);
+        logTask.start();
     }
 
 }

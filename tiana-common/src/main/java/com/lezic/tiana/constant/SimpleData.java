@@ -60,4 +60,9 @@ public class SimpleData<T> extends BaseData {
         this.result = result;
     }
 
+    @Override
+    public String toString() {
+        return "SimpleData [result=" + result + ", code=" + getCode() + ", msg=" + getMsg() + "]";
+    }
+
 }
