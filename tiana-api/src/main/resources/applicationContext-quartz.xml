@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<!-- 要调用的工作类 -->
+	<!-- <bean id="logService" class="com.keyu.smn.attament.task.AttachmentTask"></bean> -->
+	
+	<!-- 定义调用对象和调用对象的方法 -->
+	<bean id="logJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--调用的类 -->
+		<property name="targetObject">
+			<ref bean="logService" />
+		</property>
+		<!--调用类中的方法 -->
+		<property name="targetMethod">
+			<value>addLog</value>
+		</property>
+	</bean>
+	
+	<bean id="logTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="logJob" />
+		</property>
+		<property name="cronExpression">
+			<value>0/10 * * * * ? </value><!-- 每10秒 -->
+		</property>
+	</bean>
+
+	<bean id="startQuartz" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- 不执行任务注释这个即可 -->
+				<!-- <ref bean="logTrigger" /> -->
+			</list>
+		</property>
+	</bean>
+
+</beans>
