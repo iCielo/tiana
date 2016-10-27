@@ -1,0 +1,204 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.0",
+        "title": "Simple API"
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/students/add": {
+            "post": {
+                "summary": "新增学生实例",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "description": "姓名",
+                        "in": "query",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "sex",
+                        "description": "性别",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "age",
+                        "description": "年龄",
+                        "in": "query",
+                        "type": "integer",
+                        "required": false
+                    },
+                    {
+                        "name": "grade",
+                        "description": "年级",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回结果",
+                        "schema": {
+                            "$ref": "#/definitions/BaseData"
+                        }
+                    }
+                }
+            }
+        },
+        "/sutdents/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "description": "主键",
+                    "in": "path",
+                    "type": "string",
+                    "required": true
+                }
+            ],
+            "get": {
+                "summary": "根据ID主键获取学生",
+                "responses": {
+                    "200": {
+                        "description": "返回结果",
+                        "schema": {
+                            "$ref": "#/definitions/StudentSimpleData"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "根据ID主键删除学生",
+                "responses": {
+                    "200": {
+                        "description": "返回结果",
+                        "schema": {
+                            "$ref": "#/definitions/BaseData"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "根据ID主键更新学生",
+                "responses": {
+                    "200": {
+                        "description": "返回结果",
+                        "schema": {
+                            "$ref": "#/definitions/BaseData"
+                        }
+                    }
+                }
+            }
+        },
+        "/students/list": {
+            "post": {
+                "summary": "根据学生属性进行搜索",
+                "description": "根据学生属性进行搜索",
+                "parameters": [
+                    {
+                        "name": "req",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Student"
+                        },
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回结果",
+                        "schema": {
+                            "$ref": "#/definitions/StudentList"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Student": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "主键"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "姓名"
+                },
+                "sex": {
+                    "type": "string",
+                    "description": "性别"
+                },
+                "age": {
+                    "type": "integer",
+                    "description": "年龄"
+                },
+                "grade": {
+                    "type": "string",
+                    "description": "年级"
+                }
+            }
+        },
+        "StudentSimpleData": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "代码"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "result": {
+                    "$ref": "#/definitions/Student"
+                }
+            }
+        },
+        "StudentList": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "代码"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                },
+                "result": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Student"
+                    }
+                }
+            }
+        },
+        "BaseData": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "代码"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息"
+                }
+            }
+        }
+    }
+}
