@@ -127,7 +127,7 @@ public class StudentController extends BaseController {
      * @author lincl
      * @date 2016年8月26日 下午3:51:20
      */
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ApiOperation(value = "根据ID主键删除学生", notes = "根据ID主键删除学生")
     @Authorization
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
@@ -170,7 +170,7 @@ public class StudentController extends BaseController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ApiOperation(value = "根据ID更新学生实例", notes = "根据ID更新学生实例")
     @Authorization
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
