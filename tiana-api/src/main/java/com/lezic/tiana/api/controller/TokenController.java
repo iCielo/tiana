@@ -21,7 +21,9 @@ import com.lezic.tiana.constant.BaseData;
 import com.lezic.tiana.constant.SimpleData;
 import com.lezic.tiana.constant.StatusCode;
 import com.lezic.tiana.web.BaseController;
-import com.lezic.tiana.web.annotation.Log;
+import com.lezic.tiana.web.log.ModuleMenu;
+import com.lezic.tiana.web.log.annotation.LogDetail;
+import com.lezic.tiana.web.log.annotation.LogModule;
 import com.wordnik.swagger.annotations.ApiImplicitParam;
 import com.wordnik.swagger.annotations.ApiImplicitParams;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -35,6 +37,7 @@ import com.wordnik.swagger.annotations.ApiParam;
  */
 @RequestMapping(value = "/tokens")
 @RestController
+@LogModule(ModuleMenu.API_TOKEN)
 public class TokenController extends BaseController {
 
     @Autowired
@@ -51,7 +54,7 @@ public class TokenController extends BaseController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "登录", notes = "登录，获取token")
-    @Log(value = "登录，获取token")
+    @LogDetail(value = "登录，获取token")
     public  SimpleData<String> login(@ApiParam(value = "用户名") @RequestParam String username,
             @ApiParam(value = "密码") @RequestParam String password) {
         
@@ -78,7 +81,7 @@ public class TokenController extends BaseController {
      */
     @RequestMapping(value = "/logout", method = RequestMethod.DELETE)
     @ApiOperation(value = "退出登录", notes = "退出，token失效")
-    @Log(value = "退出，token失效")
+    @LogDetail(value = "退出，token失效")
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
     public BaseData logout() {
         String key = request.getHeader(Constants.TOKEN_KEY);

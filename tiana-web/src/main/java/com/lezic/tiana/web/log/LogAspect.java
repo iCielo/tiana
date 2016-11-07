@@ -3,8 +3,9 @@
  * 2016年9月13日 上午9:20:33
  * 
  */
-package com.lezic.tiana.web.aspect;
+package com.lezic.tiana.web.log;
 
+import java.lang.management.ManagementFactory;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
@@ -17,10 +18,9 @@ import org.springframework.stereotype.Component;
 
 import com.lezic.tiana.util.DataUtil;
 import com.lezic.tiana.util.ReflectionUtil;
-import com.lezic.tiana.web.annotation.Log;
-import com.lezic.tiana.web.cache.LogCache;
+import com.lezic.tiana.web.log.annotation.LogDetail;
+import com.lezic.tiana.web.log.annotation.LogModule;
 import com.lezic.tiana.web.util.SpringContextUtil;
-import com.lezic.tiana.web.vo.LogVo;
 
 /**
  * 日志切面
@@ -34,12 +34,18 @@ public class LogAspect {
 
     private Logger logger = LogManager.getLogger();
 
-    private LogCache logCache;
+    private LogQueue logCache;
 
-    @Around("@annotation(com.lezic.tiana.web.annotation.Log)")
+    @Around("@annotation(com.lezic.tiana.web.log.annotation.LogDetail)")
     public Object doAround(ProceedingJoinPoint pjd) throws Throwable {
         // 获取Log注解
+        ModuleMenu moduleMenu = ModuleMenu.OTHER;
         Class<?> cl = pjd.getTarget().getClass();
+        LogModule logModule = cl.getAnnotation(LogModule.class);
+        if (logModule != null) {
+            moduleMenu = logModule.value();
+        }
+
         String methodName = pjd.getSignature().getName();
         Object[] args = pjd.getArgs();
         Class<?>[] parameterTypes = new Class<?>[args.length];
@@ -49,24 +55,34 @@ public class LogAspect {
             sb.append(ReflectionUtil.toString(args[i]) + ",");
         }
         Method method = cl.getDeclaredMethod(methodName, parameterTypes);
-        Log log = method.getAnnotation(Log.class);
+        LogDetail log = method.getAnnotation(LogDetail.class);
 
         // 打印日志
-        logger.info("------ Begin：" + log.value());
-        logger.debug("Class：" + cl.getName());
-        logger.debug("Method：" + methodName);
-        logger.debug("Args：" + DataUtil.trim(sb.toString(), ","));
+         logger.debug("------ Begin：" + log.value());
+         logger.debug("Class：" + cl.getName());
+         logger.debug("Method：" + methodName);
+         logger.debug("Args：" + DataUtil.trim(sb.toString(), ","));
         long beginTime = System.currentTimeMillis();
         Object result = pjd.proceed();
         long costTime = System.currentTimeMillis() - beginTime;
-        logger.info("CostTime：" + costTime + "ms");
-        logger.info("Result：" + result);
-        logger.info("------ End：" + log.value());
+         logger.debug("CostTime：" + costTime + "ms");
+         logger.debug("Result：" + result);
+         logger.debug("------ End：" + log.value());
 
         // 添加到日志队列中，由异步进程进行写日志操作
-        LogVo logVo = new LogVo(UUID.randomUUID().toString(), beginTime, log.value(), result, costTime, null);
+        String clue = Thread.currentThread().getId() + "";
+        LogVo logVo = new LogVo();
+        logVo.setClue(clue);
+        logVo.setModule(moduleMenu.getModule());
+        logVo.setMenu(moduleMenu.getMenu());
+        logVo.setDetail(log.value());
+        logVo.setResult(result);
+        logVo.setTime(beginTime);
+        logVo.setCostTime(costTime);
+        logVo.setUserId(null);
+
         if (logCache == null) {
-            logCache = SpringContextUtil.getBean(LogCache.class);
+            logCache = SpringContextUtil.getBean(LogQueue.class);
         }
         logCache.add(logVo);
         return result;

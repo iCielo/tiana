@@ -10,8 +10,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lezic.tiana.web.cache.LogCache;
-import com.lezic.tiana.web.vo.LogVo;
+import com.lezic.tiana.web.log.LogQueue;
+import com.lezic.tiana.web.log.LogVo;
 
 /**
  * 日志服务
@@ -25,7 +25,7 @@ public class LogService {
     private Logger logger = LogManager.getLogger(getClass());
 
     @Autowired
-    private LogCache logCache;
+    private LogQueue logCache;
 
     /**
      * 将日志内容持久化

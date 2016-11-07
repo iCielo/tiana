@@ -33,12 +33,14 @@ public class RequestLogInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Map<?, ?> map = request.getParameterMap();
         Iterator<?> it = map.entrySet().iterator();
-        logger.info("******");
+        logger.info("******请求开始");
         logger.info("Session ID：" + request.getSession().getId());
         // logger.info("Request userID：" + SessionParams.getUserId());
         logger.info("Request url : " + request.getRequestURL());
         logger.info("Client ip : " + ClientIpUtil.getRemoteAddr(request));
-//        logger.info("Request ID：" + UUID.randomUUID().toString());
+        String clue = UUID.randomUUID().toString();
+        logger.info("Request ID：" + clue);
+        request.setAttribute("clue", clue);
         if (it.hasNext()) {
             logger.debug("------");
             while (it.hasNext()) {
@@ -61,4 +63,12 @@ public class RequestLogInterceptor extends HandlerInterceptorAdapter {
         }
         return super.preHandle(request, response, handler);
     }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {
+        super.afterCompletion(request, response, handler, ex);
+        logger.info("******请求完毕");
+    }
+
 }

@@ -28,7 +28,6 @@
 	<context:component-scan base-package="com.lezic.*" />
 	<mvc:annotation-driven />
 
-
 	<!-- 返回结果转换 -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">

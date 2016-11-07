@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.web.context.ContextLoaderListener;
 
 import com.lezic.tiana.app.service.sys.SysDictionaryService;
-import com.lezic.tiana.web.task.LogTask;
+import com.lezic.tiana.web.log.LogTask;
 import com.lezic.tiana.web.util.SpringContextUtil;
 
 /**
