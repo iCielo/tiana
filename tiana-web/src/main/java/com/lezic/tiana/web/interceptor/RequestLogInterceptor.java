@@ -39,8 +39,9 @@ public class RequestLogInterceptor extends HandlerInterceptorAdapter {
         logger.info("Request url : " + request.getRequestURL());
         logger.info("Client ip : " + ClientIpUtil.getRemoteAddr(request));
         String clue = UUID.randomUUID().toString();
-        logger.info("Request ID：" + clue);
+        logger.info("Clue ID：" + clue);
         request.setAttribute("clue", clue);
+
         if (it.hasNext()) {
             logger.debug("------");
             while (it.hasNext()) {
