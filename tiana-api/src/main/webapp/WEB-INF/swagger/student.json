@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "0.0.0",
-        "title": "Simple API"
+        "version": "0.0.1",
+        "title": "学生管理系统"
     },
     "paths": {
         "/": {

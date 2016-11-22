@@ -145,6 +145,7 @@ public class SysRoleController extends BaseController {
      * @author cielo
      */
     @RequestMapping(params = "method=isRepeat")
+    @ResponseBody
     public void isRepeat() throws IOException {
         String id = this.getParam("id");
         String name = this.getParam("name");

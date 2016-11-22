@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.lezic.tiana.orm.Page;
 import com.lezic.tiana.util.DataUtil;
+import com.lezic.tiana.web.util.ContextUtil;
 
 /**
  * 控制器基类
@@ -32,20 +33,7 @@ import com.lezic.tiana.util.DataUtil;
  */
 public abstract class BaseController {
 
-	protected HttpServletRequest request;
-
-	protected HttpServletResponse response;
-
-	protected HttpSession session;
-
 	private Logger logger = LogManager.getLogger(BaseController.class);
-
-	@ModelAttribute
-	public void setReqAndRes(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.session = request.getSession();
-	}
 
 	/**
 	 * 获取表单参数
@@ -55,7 +43,7 @@ public abstract class BaseController {
 	 * @author cielo
 	 */
 	public String getParam(String name) {
-		String str = DataUtil.trim(this.request.getParameter(name));
+		String str = DataUtil.trim(ContextUtil.getCurrentRequest().getParameter(name));
 		if (DataUtil.isNull(str)) {
 			return null;
 		}
@@ -82,6 +70,7 @@ public abstract class BaseController {
 	 * @throws IOException
 	 */
 	public void write(Object object) {
+	    HttpServletResponse response = ContextUtil.getCurrentResponse();
 		response.setContentType("application/json;charset=UTF-8");
 		// response.setContentType("text/xml;charset=UTF-8");
 		try {

@@ -6,6 +6,7 @@
 package com.lezic.tiana.web.util;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.context.request.RequestContextHolder;
@@ -28,6 +29,17 @@ public class ContextUtil {
      */
     public static HttpServletRequest getCurrentRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+    }
+
+    /**
+     * 获取当前的response
+     * 
+     * @return
+     * @author lincl
+     * @date 2016年11月22日 下午4:12:46
+     */
+    public static HttpServletResponse getCurrentResponse() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
     }
 
     /**

@@ -24,6 +24,7 @@ import com.lezic.tiana.web.BaseController;
 import com.lezic.tiana.web.log.ModuleMenu;
 import com.lezic.tiana.web.log.annotation.LogDetail;
 import com.lezic.tiana.web.log.annotation.LogModule;
+import com.lezic.tiana.web.util.ContextUtil;
 import com.wordnik.swagger.annotations.ApiImplicitParam;
 import com.wordnik.swagger.annotations.ApiImplicitParams;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -84,7 +85,7 @@ public class TokenController extends BaseController {
     @LogDetail(value = "退出，token失效")
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
     public BaseData logout() {
-        String key = request.getHeader(Constants.TOKEN_KEY);
+        String key = ContextUtil.getCurrentRequest().getHeader(Constants.TOKEN_KEY);
         tokenService.delToken(key);
         return new BaseData(StatusCode.SUCCESS, "退出登录成功");
     }
