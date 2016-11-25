@@ -109,7 +109,7 @@ public class StudentController extends BaseController {
     @ApiOperation(value = "根据ID主键获取学生", notes = "根据ID主键获取学生")
     @Authorization
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
-    @LogDetail("根据ID主键获取学生")
+    @LogDetail("根据ID主键获取学生,ID：{0}")
     public SimpleData<Student> getStudent(@PathVariable Long id) {
         SimpleData<Student> responseData = new SimpleData<Student>();
         for (Student item : list) {
@@ -155,7 +155,7 @@ public class StudentController extends BaseController {
     @ApiOperation(value = "新增学生实例", notes = "新增学生实例")
     @Authorization
     @ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "token", required = true, dataType = "string", paramType = "header"), })
-    @LogDetail("新增学生实例")
+    @LogDetail("新增学生实例，姓名：{0}")
     public SimpleData<Long> add(@ApiParam(value = "姓名") @RequestParam String name,
             @ApiParam(value = "性别") @RequestParam String sex, @ApiParam(value = "年龄") @RequestParam Integer age,
             @ApiParam(value = "年级") @RequestParam String grade) {

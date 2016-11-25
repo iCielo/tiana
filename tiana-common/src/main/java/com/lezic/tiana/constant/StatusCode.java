@@ -14,8 +14,8 @@ import java.io.Serializable;
  * 
  */
 public enum StatusCode implements Serializable {
-    
-    SUCCESS("操作成功"),
+
+    SUCCESS("操作成功"), FAIL("操作失败"), ERROR("系统错误"),
 
     /* HTTP返回状态码 */
     /** HTTP 正常 */

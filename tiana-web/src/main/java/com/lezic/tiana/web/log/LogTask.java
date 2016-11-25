@@ -10,6 +10,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.lezic.tiana.app.entity.sys.SysLog;
+import com.lezic.tiana.app.service.sys.SysLogService;
+
 /**
  * 日志持久化任务
  * 
@@ -19,18 +22,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class LogTask extends Thread {
 
-    private Logger logger = LogManager.getLogger(getClass());
+    private Logger logger = LogManager.getLogger("RunLog");
 
     @Autowired
     private LogQueue logCache;
 
+    @Autowired
+    private SysLogService sysLogService;
+
     @Override
     public void run() {
         while (true) {
-            LogVo logVo = logCache.poll();
+            SysLog logVo = logCache.poll();
             if (logVo != null) {
-                logger.debug("记录一条操作日志");
-                logger.debug(logVo.toString());
+                LogPrint.debug(logVo.getClue(), "[日志入库] " + logVo.toString());
+                try {
+                    sysLogService.saveH(logVo);
+                } catch (Exception e) {
+                    logger.error(e);
+                }
             }
         }
     }

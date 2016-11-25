@@ -6,15 +6,14 @@ package com.lezic.tiana.web.interceptor;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.lezic.tiana.web.constant.WebConstant;
+import com.lezic.tiana.web.log.LogPrint;
 import com.lezic.tiana.web.util.ClientIpUtil;
 
 /**
@@ -25,25 +24,22 @@ import com.lezic.tiana.web.util.ClientIpUtil;
  */
 public class RequestLogInterceptor extends HandlerInterceptorAdapter {
 
-    /** 日志 */
-    private Logger logger = LogManager.getLogger();
-
     @SuppressWarnings("unchecked")
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        String clue = (String) request.getAttribute(WebConstant.CLUE_ID);
+        LogPrint logPrint = new LogPrint(clue);
+        logPrint.debug("请求开始。。。");
+        logPrint.debug("会话标志：" + request.getSession().getId());
+        // LogPrint.debug("Request userID：" + SessionParams.getUserId());
+        logPrint.debug("请求路径 : " + request.getRequestURL());
+        logPrint.debug("客户地址 : " + ClientIpUtil.getRemoteAddr(request));
+
         Map<?, ?> map = request.getParameterMap();
         Iterator<?> it = map.entrySet().iterator();
-        logger.info("******请求开始");
-        logger.info("Session ID：" + request.getSession().getId());
-        // logger.info("Request userID：" + SessionParams.getUserId());
-        logger.info("Request url : " + request.getRequestURL());
-        logger.info("Client ip : " + ClientIpUtil.getRemoteAddr(request));
-        String clue = UUID.randomUUID().toString();
-        logger.info("Clue ID：" + clue);
-        request.setAttribute("clue", clue);
-
+        int count = 0;
         if (it.hasNext()) {
-            logger.debug("------");
             while (it.hasNext()) {
                 Map.Entry<String, Object> entry = (Map.Entry<String, Object>) it.next();
                 String[] value = (String[]) entry.getValue();
@@ -55,12 +51,12 @@ public class RequestLogInterceptor extends HandlerInterceptorAdapter {
                     }
                 }
                 if (entry.getKey().contains("password") || entry.getKey().contains("pwd")) {
-                    logger.debug(entry.getKey() + " : *****");
+                    logPrint.debug("参数[" + count + "]：" + entry.getKey() + "=*****");
                 } else {
-                    logger.debug(entry.getKey() + " : " + str.toString());
+                    logPrint.debug("参数[" + count + "]：" + entry.getKey() + "=" + str.toString());
                 }
+                count++;
             }
-            logger.debug("------");
         }
         return super.preHandle(request, response, handler);
     }
@@ -69,7 +65,9 @@ public class RequestLogInterceptor extends HandlerInterceptorAdapter {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
         super.afterCompletion(request, response, handler, ex);
-        logger.info("******请求完毕");
+        String clue = (String) request.getAttribute(WebConstant.CLUE_ID);
+        LogPrint logPrint = new LogPrint(clue);
+        logPrint.debug("请求结束。");
     }
 
 }

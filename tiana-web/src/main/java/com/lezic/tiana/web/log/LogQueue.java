@@ -9,6 +9,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.springframework.stereotype.Component;
 
+import com.lezic.tiana.app.entity.sys.SysLog;
+
 /**
  * 日志缓存队列
  * 
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Component;
  * 
  */
 @Component
-public class LogQueue extends ConcurrentLinkedQueue<LogVo> {
+public class LogQueue extends ConcurrentLinkedQueue<SysLog> {
 
     private static final long serialVersionUID = 1L;
 }

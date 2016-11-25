@@ -65,15 +65,15 @@
 
 	<!-- 拦截器 -->
 	<mvc:interceptors>
-		<!--参数 -->
-		<mvc:interceptor>
-			<mvc:mapping path="/**/*" />
-			<bean class="com.lezic.tiana.web.interceptor.RequestLogInterceptor" />
-		</mvc:interceptor>
 		<!--鉴权 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="com.lezic.tiana.api.interceptor.AuthorizationInterceptor"></bean>
+		</mvc:interceptor>
+		<!--参数 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**/*" />
+			<bean class="com.lezic.tiana.web.interceptor.RequestLogInterceptor" />
 		</mvc:interceptor>
 		<!--国际化资源切换（根据请求参数中的locale参数自动切换） -->
 		<mvc:interceptor>

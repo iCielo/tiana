@@ -10,11 +10,11 @@
 	<bean id="logJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<!--调用的类 -->
 		<property name="targetObject">
-			<ref bean="logService" />
+			<ref bean="sysLogService" />
 		</property>
 		<!--调用类中的方法 -->
 		<property name="targetMethod">
-			<value>addLog</value>
+			<value>saveH</value>
 		</property>
 	</bean>
 	

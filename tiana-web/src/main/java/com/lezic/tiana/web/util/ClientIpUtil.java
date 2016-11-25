@@ -38,13 +38,13 @@ public class ClientIpUtil {
 //			logger.debug("remoteAddr：" + remoteAddr);
 			return remoteAddr;
 		} else if (xRealIp != null && !"".equals(xRealIp) && !"127.0.0.1".equals(xRealIp)) {
-			logger.debug("X-Real-IP:" + xRealIp);
+//			logger.debug("X-Real-IP:" + xRealIp);
 			return xRealIp;
 		} else if (xForwardedFor != null && !"".equals(xForwardedFor) && !"127.0.0.1".equals(xForwardedFor)) {
-			logger.debug("X-Forwarded-For:" + xForwardedFor);
+//			logger.debug("X-Forwarded-For:" + xForwardedFor);
 			return xForwardedFor;
 		} else {
-			logger.debug("remoteAddr：" + remoteAddr);
+//			logger.debug("remoteAddr：" + remoteAddr);
 			return remoteAddr;
 		}
 	}
