@@ -55,7 +55,7 @@ public class TokenController extends BaseController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "登录", notes = "登录，获取token")
-    @LogDetail(value = "登录，获取token")
+    @LogDetail(value = "用户登录系统，获取token。用户名：{0}")
     public  SimpleData<String> login(@ApiParam(value = "用户名") @RequestParam String username,
             @ApiParam(value = "密码") @RequestParam String password) {
         
