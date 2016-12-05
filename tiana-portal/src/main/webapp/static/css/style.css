@@ -24,3 +24,19 @@
 .control-label {
 	text-align: right;
 }
+
+div.search {
+	margin-bottom: 20px;
+}
+div.search .input-text,.select-box {
+	width: 200px;
+}
+
+/*H-UI重写 */
+.form-horizontal .form-label {
+	text-align: right;
+}
+
+.form .row {
+	margin-top: 23px;
+}

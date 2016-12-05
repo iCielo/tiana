@@ -4,6 +4,9 @@
  */
 package com.lezic.tiana.web.context;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javax.servlet.ServletContextEvent;
 
 import org.apache.logging.log4j.LogManager;
@@ -11,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.web.context.ContextLoaderListener;
 
 import com.lezic.tiana.app.service.sys.SysDictionaryService;
+import com.lezic.tiana.web.log.LogTask;
 import com.lezic.tiana.web.util.SpringContextUtil;
 
 /**
@@ -36,6 +40,10 @@ public class CustomContextLoaderListener extends ContextLoaderListener {
                 .getBean(SysDictionaryService.class);
         sysDictionaryService.initCache();
         logger.info((i++) + "：数据字典加载完成！");
+        
+        LogTask logTask = (LogTask) SpringContextUtil.getBean(LogTask.class);
+        logTask.start();
+        logger.info((i++) + ".初始化系统日志AOP完成！");
     }
 
 }

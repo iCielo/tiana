@@ -8,62 +8,49 @@
 	$(function() {
 		$("#form").validator({
 			fields : {
-				name : "required;length(~255);remote(${CP}/sys/role.do?method=isRepeat)",
+				code : "required;length(~20);remote(${CP}/sys/role.do?method=chkCode)",
+				name : "required;length(~255);remote(${CP}/sys/role.do?method=chkName)",
 				status : "required;",
 				remark : "length(~255);",
 			}
-		});
-		$('#form').on('valid.form', function(e) {
-			Common.ajax({
-				url : "${CP}/sys/role.do?method=addEntity",
-				data : $(this).serialize(),
-				success : function(data) {
-					if (parent.ifr_main && typeof (parent.ifr_main.query) == 'function') {
-						parent.ifr_main.query();
-					} else if (typeof (parent.query) == 'function') {
-						parent.query();
-					}
-					MyLayer.close();
-				}
-			})
 		});
 	});
 </script>
 </head>
 <body>
-	<section class="panel">
-		<div class="panel-body">
-			<form class="form-horizontal tasi-form" method="post" id="form">
-				<div class="form-group">
-					<label class="col-sm-3 col-xs-3 control-label"><span class="form-must">*</span>名称：</label>
-					<div class="col-sm-8 col-xs-8">
-						<input class="form-control" type="text" id="name" name="name" />
-					</div>
+	<article class="page-container">
+		<form action="" method="post" class="form form-horizontal" id="form">
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色代码：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="" placeholder=""  id="code" name="code" >
 				</div>
-				<div class="form-group">
-					<label class="col-sm-3 col-xs-3 control-label"><span class="form-must">*</span>状态：</label>
-					<div class="col-sm-8 col-xs-8">
-						<dict:select cssClass="form-control input-sm" sort="STATUS" id="status" name="status" key="${entity.status }"/>
-					</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色名称：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" class="input-text" value="" placeholder=""  id="name" name="name" >
 				</div>
-				<div class="form-group">
-					<label class="col-sm-3 col-xs-3 control-label">备注：</label>
-					<div class="col-sm-8 col-xs-8">
-						<textarea class="form-control" type="text" id="remark" name="remark" ></textarea>
-					</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<span class="select-box"><dict:select cssClass="select" sort="STATUS" id="status" name="status" key="1"/></span>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-3 col-xs-offset-3">
-						<button class="btn btn-primary" type="submit">
-							<i class="glyphicon glyphicon-ok"></i>&nbsp;确定
-						</button>
-						<button class="btn btn-primary" type="button" onclick="MyLayer.close();">
-							<i class="glyphicon glyphicon-remove"></i>&nbsp;关闭
-						</button>
-					</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">备注：</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<textarea class="textarea" placeholder=""  id="remark" name="remark"></textarea>
 				</div>
-			</form>
-		</div>
-	</section>
+			</div>
+			<div class="row cl">
+				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+					<button type="submit" class="btn btn-success radius" ><i class="icon-ok"></i> 确定</button>
+					<button type="submit" class="btn btn-success radius"  onclick="MyLayer.close();"><i class="icon-cancel"></i> 关闭</button>
+				</div>
+			</div>
+		</form>
+	</article>
 </body>
 </html>

@@ -16,6 +16,8 @@
 		<property name="targetMethod">
 			<value>saveH</value>
 		</property>
+		<!-- 并发 -->   
+        <property name="concurrent" value="true"/> 
 	</bean>
 	
 	<bean id="logTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
@@ -31,7 +33,7 @@
 		<property name="triggers">
 			<list>
 				<!-- 不执行任务注释这个即可 -->
-				<!-- <ref bean="logTrigger" /> -->
+				<ref bean="logTrigger" />
 			</list>
 		</property>
 	</bean>

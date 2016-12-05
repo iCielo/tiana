@@ -287,6 +287,27 @@ public class DataUtil {
 		return content.split(regex);
 	}
 
+	   /**
+     * 从字符串获取Long数组
+     * 
+     * @param content
+     * @param regex
+     * @return
+     * @author cielo
+     */
+    public static Long[] splitToLong(String content, String regex) {
+        if (DataUtil.isNull(content)) {
+            return null;
+        }
+        content = DataUtil.trim(content, regex);
+        String[] arr = content.split(regex);
+        Long[] arr2 = new Long[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            arr2[i]= DataUtil.longOfString(arr[i]);
+        }
+        return arr2;
+    }
+    
 	/**
 	 * 判断数组arr是否包含 item
 	 * 

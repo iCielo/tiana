@@ -47,7 +47,7 @@ public class SysDictionaryService extends BaseService<SysDictionary> {
 		SystemCache.DICT_KEY_MAP.clear();
 		logger.info("加载数据字典缓存......BEGIN");
 		List<SysDictionary> list = (List<SysDictionary>) this
-				.findH("from SysDictionary where status = 'ON' order by seq");
+				.findH("from SysDictionary where status = '1' order by seq");
 		for (Iterator<SysDictionary> iterator = list.iterator(); iterator.hasNext();) {
 			SysDictionary item = iterator.next();
 			logger.info(item.toString());

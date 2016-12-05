@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -27,8 +28,8 @@ public class SysDictionary implements java.io.Serializable {
     /**
      * 状态：on，off
      */
-    @Column(name = "status", length = 50, unique = true, nullable = false)
-    private String status;
+    @Column(name = "status", unique = true)
+    private Integer status;
 
     /**
      * 操作用户
@@ -58,8 +59,8 @@ public class SysDictionary implements java.io.Serializable {
      * 主键
      */
     @Id
-    @Column(name = "id", length = 36, unique = true, nullable = false)
-    private String id;
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
 
     /**
      * 备注
@@ -90,14 +91,14 @@ public class SysDictionary implements java.io.Serializable {
     /**
      * 设置 状态：on，off
      */
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
     /**
-     * 获取 状态：on，off
+     * 获取 状态
      */
-    public String getStatus() {
+    public Integer getStatus() {
         return this.status;
     }
 
@@ -160,14 +161,14 @@ public class SysDictionary implements java.io.Serializable {
     /**
      * 设置 主键
      */
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     /**
      * 获取 主键
      */
-    public String getId() {
+    public Long getId() {
         return this.id;
     }
 

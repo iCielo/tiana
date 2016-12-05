@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<!DOCTYPE HTML>
 <html>
 <head>
 <%@ include file="../../common/list.jsp"%>
@@ -8,89 +8,45 @@
 	$(function() {
 		$('#dataTable').myBootstrapTable({
 			idField : "id",
-			columns : [ {
-				checkbox : true,
-				align : 'center',
-				valign : 'middle'
-			}, {
-				title : '名称',
-				field : 'name',
-				align : 'center'
-			}, {
-				title : '备注',
-				field : 'remark',
-				align : 'center'
-			}, {
-				title : '状态',
-				field : 'status',
-				align : 'center',
-				formatter : function(value, row, index) {
-					if (value == "ON") {
-						return "<span title=\"启用\" class=\"fa fa-check-square-o fa-lg\" style=\"color:green;\"></span>";
-					} else {
-						return "<span title=\"禁用\" class=\"fa fa-square-o fa-lg\"></span>";
-					}
-				}
-			} ],
+			columns : [
+					{
+						checkbox : true,
+						align : 'center',
+						valign : 'middle'
+					},
+					{
+						title : '角色代码',
+						field : 'code',
+						align : 'center'
+					},
+					{
+						title : '角色名称',
+						field : 'name',
+						align : 'center'
+					},
+					{
+						title : '备注',
+						field : 'remark',
+						align : 'center'
+					},
+					{
+						title : '状态',
+						field : 'status',
+						align : 'center',
+						formatter : statusFormatter
+					} ],
 			url : "${CP}/sys/role.do?method=loadData",
 			queryParams : getQueryParams
 		});
 	});
 
-	//新增
-	function addEntity() {
-		MyLayer.open({
-			title : "新增用户角色",
-			content : "${CP}/sys/role.do?method=add",
-			area : [ '400px', '305px' ]
-		});
-	}
-
-	//修改
-	function updEntity() {
-		var rows = $("#dataTable").bootstrapTable('getSelections');
-		if (rows.length != 1) {
-			MyLayer.msg("请选择要修改的单条记录！");
-			return;
-		}
-		MyLayer.open({
-			title : "修改用户角色",
-			content : "${CP}/sys/role.do?method=upd&id=" + rows[0].id,
-			area : [ '400px', '305px' ]
-		});
-	}
-
-	//删除
-	function delEntity() {
-		var rows = $("#dataTable").bootstrapTable('getSelections');
-		if (rows.length == 0) {
-			MyLayer.msg("请选择要删除的记录！");
-			return;
-		}
-		var ids = [];
-		for (var i = 0; i < rows.length; i++) {
-			ids.push(rows[i].id);
-		}
-		MyLayer.confirm("是否真的删除？", function(index) {
-			Common.ajax({
-				url : "${CP}/sys/role.do?method=delEntity",
-				data : {
-					ids : ids.join(",")
-				},
-				success : function(data) {
-					query();
-				}
-			})
-		});
-	}
-	
 	//启用、禁用
-	function opStatus(status){
+	function opStatus(status) {
 		var rows = $("#dataTable").bootstrapTable('getSelections');
 		if (rows.length == 0) {
-			if(status=="ON"){
-				MyLayer.msg("请选择要启用的记录！");	
-			}else{
+			if (status == "1") {
+				MyLayer.msg("请选择要启用的记录！");
+			} else {
 				MyLayer.msg("请选择要禁用的记录！");
 			}
 			return;
@@ -111,49 +67,48 @@
 				}
 				query();
 			}
-		})
+		});
 	}
 </script>
 </head>
 <body>
-	<section class="panel">
-		<header class="panel-heading"> 用户角色 </header>
-		<div class="panel-body">
-			<div id="searchForm">
-				<form class="form-horizontal" onsubmit="return false;">
-					<div class="form-group">
-						<label class="col-sm-1 col-xs-1 control-label">名称：</label>
-						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="name" name="name" placeholder="">
-						</div>
-					</div>
-				</form>
-			</div>
-			<div id="toolbar">
-				<button type="button" class="btn btn-primary" onclick="query()">
-					<i class="glyphicon glyphicon-search"></i>&nbsp;搜索&nbsp;
-				</button>
-				<button type="reset" class="btn btn-primary form-label">
-					<i class="glyphicon glyphicon-repeat"></i>&nbsp;清空&nbsp;
-				</button>
-				<button class="btn btn-primary " onclick="addEntity()">
-					<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;新&nbsp;增
-				</button>
-				<button class="btn btn-primary" onclick="updEntity()">
-					<i class="glyphicon glyphicon-edit"></i>&nbsp;修&nbsp;改
-				</button>
-				<button class="btn btn-danger " onclick="delEntity()">
-					<i class="glyphicon glyphicon-remove"></i>&nbsp;删&nbsp;除
-				</button>
-				<button class="btn btn-primary " onclick="opStatus('ON')">
-					<i class="glyphicon glyphicon-ok-circle"></i>启用
-				</button>
-				<button class="btn btn-primary " onclick="opStatus('OFF')">
-					<i class="glyphicon glyphicon-ban-circle"></i>禁用
-				</button>
-			</div>
-			<table id="dataTable"></table>
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 用户角色 <a
+			class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i
+			class="Hui-iconfont">&#xe68f;</i></a>
+	</nav>
+	<div class="page-container">
+		<div class="search">
+			<form class="form-horizontal" onsubmit="return false;">
+			<input type="text" class="input-text" placeholder="角色代码" id="code" name="code" >
+			<input type="text" class="input-text" placeholder="角色名称" id="name" name="name">
+			<span class="select-box"><dict:select cssClass="select" sort="STATUS" id="status" name="status"  emptyOption="状态"/></span>
+			<button type="submit" class="btn btn-success" id="" name="">
+				<i class="fa fa-search"></i> 查询
+			</button>
+			<button type="reset" class="btn btn-default" id="" name="">
+				<i class="fa fa-times"></i> 清空
+			</button>
+			</form>
 		</div>
-	</section>
+		<div id="toolbar">
+			<button class="btn btn-primary " action="add" area-width="450px" area-height="450px">
+				<i class="fa fa-plus"></i>&nbsp;新&nbsp;增
+			</button>
+			<button class="btn btn-primary" action="upd" area-width="450px" area-height="450px">
+				<i class="fa fa-pencil-square-o"></i>&nbsp;修&nbsp;改
+			</button>
+			<button class="btn btn-danger " action="del">
+				<i class="fa fa-trash"></i>&nbsp;删&nbsp;除
+			</button>
+			<button class="btn btn-primary " onclick="opStatus('1')">
+				<i class="fa fa-check-circle-o"></i>启用
+			</button>
+			<button class="btn btn-primary " onclick="opStatus('0')">
+				<i class="fa fa-ban"></i>禁用
+			</button>
+		</div>
+		<table id="dataTable"></table>
+	</div>
 </body>
 </html>

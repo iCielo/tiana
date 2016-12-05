@@ -6,6 +6,7 @@ package com.lezic.tiana.web.interceptor;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,9 @@ public class RequestLogInterceptor extends HandlerInterceptorAdapter {
     @SuppressWarnings("unchecked")
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
+        // 设置线程ID
+        request.setAttribute(WebConstant.CLUE_ID, UUID.randomUUID().toString());
+        
         String clue = (String) request.getAttribute(WebConstant.CLUE_ID);
         LogPrint logPrint = new LogPrint(clue);
         logPrint.debug("请求开始。。。");

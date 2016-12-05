@@ -11,62 +11,69 @@ import javax.persistence.Table;
  * 用户角色
  * 
  * @author cielo
- * @date Wed Feb 24 09:37:28 CST 2016
+ * @date Mon Dec 05 11:12:02 CST 2016
  */
 @Entity
 @Table(name = "sys_role")
 public class SysRole implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
+
     /**
-     * uuid主键标志
+     * 
      */
     @Id
-    @Column(name = "id", length = 36, unique = true, nullable = false)
-    private String id;
-
-    /**
-     * 操作用户ID
-     */
-    @Column(name = "op_user_id", length = 36)
-    private String opUserId;
-
-    /**
-     * 角色名
-     */
-    @Column(name = "name", length = 255)
-    private String name;
-
-    /**
-     * 操作时间
-     */
-    @Column(name = "op_time")
-    private Date opTime;
-
-    /**
-     * 状态 on:启用 off:禁用
-     */
-    @Column(name = "status", length = 20, unique = true)
-    private String status;
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
 
     /**
      * 备注
      */
-    @Column(name = "remark", length = 255)
+    @Column(name = "remark", length = 255, unique = true)
     private String remark;
 
     /**
-     * 设置 uuid主键标志
+     * 操作用户ID
      */
-    public void setId(String id) {
-        this.id = id;
+    @Column(name = "op_user_id", length = 36, unique = true)
+    private String opUserId;
+
+    /**
+     * 主键
+     */
+    @Column(name = "code", length = 20, unique = true, nullable = false)
+    private String code;
+
+    /**
+     * 状态 1:启用 0:禁用
+     */
+    @Column(name = "status", unique = true)
+    private Integer status;
+
+    /**
+     * 操作时间
+     */
+    @Column(name = "op_time", unique = true)
+    private Date opTime;
+
+    /**
+     * 角色名
+     */
+    @Column(name = "name", length = 255, unique = true, nullable = false)
+    private String name;
+
+    /**
+     * 设置 备注
+     */
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     /**
-     * 获取 uuid主键标志
+     * 获取 备注
      */
-    public String getId() {
-        return this.id;
+    public String getRemark() {
+        return this.remark;
     }
 
     /**
@@ -84,17 +91,45 @@ public class SysRole implements java.io.Serializable {
     }
 
     /**
-     * 设置 角色名
+     * 设置
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
-     * 获取 角色名
+     * 获取
      */
-    public String getName() {
-        return this.name;
+    public Long getId() {
+        return this.id;
+    }
+
+    /**
+     * 设置 主键
+     */
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    /**
+     * 获取 主键
+     */
+    public String getCode() {
+        return this.code;
+    }
+
+    /**
+     * 设置 状态 1:启用 0:禁用
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    /**
+     * 获取 状态 1:启用 0:禁用
+     */
+    public Integer getStatus() {
+        return this.status;
     }
 
     /**
@@ -112,31 +147,23 @@ public class SysRole implements java.io.Serializable {
     }
 
     /**
-     * 设置 状态 on:启用 off:禁用
+     * 设置 角色名
      */
-    public void setStatus(String status) {
-        this.status = status;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
-     * 获取 状态 on:启用 off:禁用
+     * 获取 角色名
      */
-    public String getStatus() {
-        return this.status;
+    public String getName() {
+        return this.name;
     }
 
-    /**
-     * 设置 备注
-     */
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    /**
-     * 获取 备注
-     */
-    public String getRemark() {
-        return this.remark;
+    @Override
+    public String toString() {
+        return "SysRole [" + "remark=" + remark + ", " + "opUserId=" + opUserId + ", " + "id=" + id + ", " + "code="
+                + code + ", " + "status=" + status + ", " + "opTime=" + opTime + ", " + "name=" + name + "]";
     }
 
 }

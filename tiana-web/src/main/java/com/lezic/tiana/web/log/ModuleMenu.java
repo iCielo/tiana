@@ -12,7 +12,12 @@ package com.lezic.tiana.web.log;
  * 
  */
 public enum ModuleMenu {
-
+    
+    /** 系统管理 > 用户角色 */
+    SYS_ROLE("系统管理", "用户角色"),
+    /** 系统管理 > 系统用户 */
+    SYS_USER("系统管理", "系统用户"),
+    
     /** API > 学生管理 */
     API_STUDENT("API", "学生管理"),
     /** API > 登录退出 */

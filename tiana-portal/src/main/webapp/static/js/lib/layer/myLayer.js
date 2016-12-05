@@ -16,19 +16,20 @@
 	 */
 	MyLayer.open = function(options, winDom) {
 		if (typeof (winDom) == 'undefined') {
-			winDom = top;
+			winDom = window;//winDom = top;
 		}
 		var defaultOption = {
 			type : 2,
 			title : '标题',
 			shadeClose : true,
-			shade : 0.8,
+			maxmin: true,
+			shade : 0.4,
 			area : [ '50%', '50%' ],
 			content : ''// 可以是iframe的url
 		};
 		options = $.extend(true, {}, defaultOption, options);
 		winDom.layer.open(options);
-	}
+	};
 
 	/**
 	 * 关闭对话框
@@ -39,11 +40,11 @@
 	 */
 	MyLayer.close = function(winDom) {
 		if (typeof (winDom) == 'undefined') {
-			winDom = top;
+			winDom = parent;//winDom = top;
 		}
 		var index = winDom.layer.getFrameIndex(window.name); // 先得到当前iframe层的索引
 		winDom.layer.close(index); // 再执行关闭
-	}
+	};
 
 	/**
 	 * layer的对话框提示
@@ -57,10 +58,10 @@
 	 */
 	MyLayer.alert = function(content, options, yes, winDom) {
 		if (typeof (winDom) == 'undefined') {
-			winDom = top;
+			winDom = window;//winDom = top;
 		}
 		return winDom.layer.alert(content, options, yes);
-	}
+	};
 
 	/**
 	 * 确认对话框
@@ -77,11 +78,11 @@
 	 */
 	MyLayer.confirm = function(content, yes, cancel, options, winDom) {
 		if (typeof (winDom) == 'undefined') {
-			winDom = top;
+			winDom = window;//winDom = top;
 		}
 		var defaultOption = {
 			btn : [ '确认', '取消' ]
-		}
+		};
 
 		var yesFunc = function(index) {
 			if (typeof (yes) == 'function') {
@@ -100,7 +101,7 @@
 		options = $.extend(true, {}, defaultOption, options);
 		return winDom.layer.confirm(content, options, yesFunc, cancelFunc);
 
-	}
+	};
 
 	/**
 	 * layer的消息提示
@@ -117,8 +118,8 @@
 	 */
 	MyLayer.msg = function(content, options, end, winDom) {
 		if (typeof (winDom) == 'undefined') {
-			winDom = top;
+			winDom = window;//winDom = top;
 		}
 		return winDom.layer.msg(content, options, end);
-	}
+	};
 }(window));

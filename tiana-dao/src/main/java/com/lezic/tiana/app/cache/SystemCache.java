@@ -21,7 +21,7 @@ public class SystemCache {
 	/**
 	 * 数据字典缓存 MAP<id,SysDictionary>
 	 */
-	public static Map<String, SysDictionary> DICT_ID_MAP = new ConcurrentHashMap<String, SysDictionary>();
+	public static Map<Long, SysDictionary> DICT_ID_MAP = new ConcurrentHashMap<Long, SysDictionary>();
 
 	/**
 	 * 数据字典缓存 MAP<sort+"-"+dictKey,SysDictionary>

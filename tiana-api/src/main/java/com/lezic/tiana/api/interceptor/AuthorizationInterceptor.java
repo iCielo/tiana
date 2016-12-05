@@ -39,7 +39,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         // 设置线程ID
-        request.setAttribute(WebConstant.CLUE_ID, UUID.randomUUID().toString());
+//        request.setAttribute(WebConstant.CLUE_ID, UUID.randomUUID().toString());
 
         // 校验IP白名单
         // if (whiteIPService.isLegal(ClientIpUtil.getRemoteAddr(request)) == false) {

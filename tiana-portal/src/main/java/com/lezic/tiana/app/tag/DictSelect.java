@@ -35,6 +35,9 @@ public class DictSelect extends TagSupport {
 
 	/** 选中的值 */
 	private String key;
+	
+	/**为空时的选择提示语*/
+	private String emptyOption;
 
 	/** 标签样式 */
 	private String style;
@@ -66,7 +69,10 @@ public class DictSelect extends TagSupport {
 				sb.append(" class=\"" + cssClass + "\"");
 			}
 			sb.append(">");
-			sb.append("<option value=\"\">------请选择-------</option>");
+			if(DataUtil.isNull(emptyOption)){
+			    emptyOption = "------请选择-------";
+			}
+			sb.append("<option value=\"\">"+emptyOption+"</option>");
 			List<SysDictionary> list = SystemCache.DICT_SORT_MAP.get(sort);
 			
 			if (list != null) {
@@ -186,5 +192,13 @@ public class DictSelect extends TagSupport {
 	public void setKey(String key) {
 		this.key = key;
 	}
+
+    public String getEmptyOption() {
+        return emptyOption;
+    }
+
+    public void setEmptyOption(String emptyOption) {
+        this.emptyOption = emptyOption;
+    }
 
 }

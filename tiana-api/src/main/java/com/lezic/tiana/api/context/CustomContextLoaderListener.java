@@ -4,13 +4,15 @@
  */
 package com.lezic.tiana.api.context;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javax.servlet.ServletContextEvent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.context.ContextLoaderListener;
 
-import com.lezic.tiana.app.service.sys.SysDictionaryService;
 import com.lezic.tiana.web.log.LogTask;
 import com.lezic.tiana.web.util.SpringContextUtil;
 
@@ -33,6 +35,11 @@ public class CustomContextLoaderListener extends ContextLoaderListener {
         int i = 1;
 
         logger.info((i++) + ".初始化系统日志AOP");
+        ExecutorService service=Executors.newFixedThreadPool(5);
+        for (int j = 0; j < 5; j++) {
+            
+        }
+        
         LogTask logTask = (LogTask) SpringContextUtil.getBean(LogTask.class);
         logTask.start();
     }

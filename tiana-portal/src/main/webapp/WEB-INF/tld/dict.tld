@@ -44,6 +44,12 @@
 			<description>选中值</description>
 		</attribute>
 		<attribute>
+			<name>emptyOption</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>为空时的选择提示语</description>
+		</attribute>
+		<attribute>
 			<name>style</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>

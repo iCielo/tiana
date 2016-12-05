@@ -7,7 +7,6 @@ package com.lezic.tiana.app.action.sys;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,6 +28,9 @@ import com.lezic.tiana.orm.ParamMap;
 import com.lezic.tiana.orm.util.HibernateUtil;
 import com.lezic.tiana.util.DataUtil;
 import com.lezic.tiana.web.BaseController;
+import com.lezic.tiana.web.log.ModuleMenu;
+import com.lezic.tiana.web.log.annotation.LogDetail;
+import com.lezic.tiana.web.log.annotation.LogModule;
 
 /**
  * @author cielo
@@ -36,6 +38,7 @@ import com.lezic.tiana.web.BaseController;
  */
 @Controller
 @RequestMapping("/sys/role.do")
+@LogModule(ModuleMenu.SYS_ROLE)
 public class SysRoleController extends BaseController {
 
     private Logger logger = LogManager.getLogger();
@@ -50,6 +53,7 @@ public class SysRoleController extends BaseController {
      * @return
      * @author cielo
      */
+    @LogDetail("访问用户角色列表")
     @RequestMapping(params = "method=list", method = RequestMethod.GET)
     public String listPage() {
         return "/sys/role/SysRole-list";
@@ -59,6 +63,7 @@ public class SysRoleController extends BaseController {
      * 新增页面
      */
     @RequestMapping(params = "method=add", method = RequestMethod.GET)
+    @LogDetail("访问用户角色新增列表")
     public String addPage() {
         return "/sys/role/SysRole-add";
     }
@@ -67,9 +72,8 @@ public class SysRoleController extends BaseController {
      * 修改页面
      */
     @RequestMapping(params = "method=upd", method = RequestMethod.GET)
-    public String updPage(Model model) {
-        String id = this.getParam("id");
-        if (DataUtil.isNotNull(id)) {
+    public String updPage(Long id, Model model) {
+        if (id != null) {
             model.addAttribute("entity", sysRoleService.getH(id));
         }
         return "/sys/role/SysRole-upd";
@@ -84,14 +88,16 @@ public class SysRoleController extends BaseController {
      * @throws IOException
      */
     @RequestMapping(params = "method=loadData", method = RequestMethod.GET)
-    public void loadData() throws IOException {new SimpleData<String>();
+    @ResponseBody
+    public Page<SysRole> loadData() throws IOException {
+        new SimpleData<String>();
         Page<SysRole> page = new Page<SysRole>();
         page.setOffset(DataUtil.integerOfString(this.getParam("offset"), 0));
         page.setPageSize(DataUtil.integerOfString(this.getParam("limit"), 10));
         String hql = "from SysRole";
         ParamMap params = new ParamMap();
         sysRoleService.pageH(page, hql, params);
-        this.outBootstrapTable(page);
+        return page;
     }
 
     /**
@@ -102,9 +108,6 @@ public class SysRoleController extends BaseController {
     @RequestMapping(params = "method=addEntity")
     @ResponseBody
     public BaseData addEntity(@ModelAttribute SysRole entity) throws IOException {
-        if (entity != null) {
-            entity.setId(UUID.randomUUID().toString());
-        }
         sysRoleService.saveH(entity);
         return new BaseData();
     }
@@ -133,9 +136,29 @@ public class SysRoleController extends BaseController {
     @RequestMapping(params = "method=delEntity")
     @ResponseBody
     public BaseData delEntity() throws IOException {
-        String[] ids = DataUtil.split(this.getParam("ids"), ",");
+        Long[] ids = DataUtil.splitToLong(this.getParam("ids"), ",");
         sysRoleService.batchDelH(SysRole.class, ids);
         return new BaseData();
+    }
+
+    /**
+     * 判断code是否重复
+     * 
+     * @throws IOException
+     * @author cielo
+     */
+    @RequestMapping(params = "method=chkCode")
+    @ResponseBody
+    public void chkCode(String code) throws IOException {
+        String hql = "from SysRole where  code = ?";
+        boolean isRepeat = sysRoleService.isExist(hql, code);
+        Map<String, String> ret = new HashMap<String, String>();
+        if (isRepeat) {
+            ret.put("error", "对不起，已存在该代码！");
+        } else {
+            ret.put("ok", "该代码可用！");
+        }
+        this.write(ret);
     }
 
     /**
@@ -144,11 +167,9 @@ public class SysRoleController extends BaseController {
      * @throws IOException
      * @author cielo
      */
-    @RequestMapping(params = "method=isRepeat")
+    @RequestMapping(params = "method=chkName")
     @ResponseBody
-    public void isRepeat() throws IOException {
-        String id = this.getParam("id");
-        String name = this.getParam("name");
+    public void chkName(Long id, String name) throws IOException {
         String hql = "from SysRole where  (id != ? or ? is null) and name = ?";
         boolean isRepeat = sysRoleService.isExist(hql, id, id, name);
 
@@ -170,8 +191,8 @@ public class SysRoleController extends BaseController {
     @RequestMapping(params = "method=opStatus")
     @ResponseBody
     public BaseData opStatus() throws IOException {
-        String[] ids = DataUtil.split(this.getParam("ids"), ",");
-        String status = this.getParam("status");
+        Long[] ids = DataUtil.splitToLong(this.getParam("ids"), ",");
+        Integer status = DataUtil.integerOfString(this.getParam("status"));
         if (DataUtil.isEmpty(ids)) {
             return new BaseData(StatusCode.APP_1001, "要操作记录ID为空");
         } else if (DataUtil.isNull(status)) {
