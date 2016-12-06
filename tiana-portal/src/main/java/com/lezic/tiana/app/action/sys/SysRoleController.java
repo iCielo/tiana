@@ -94,8 +94,11 @@ public class SysRoleController extends BaseController {
         Page<SysRole> page = new Page<SysRole>();
         page.setOffset(DataUtil.integerOfString(this.getParam("offset"), 0));
         page.setPageSize(DataUtil.integerOfString(this.getParam("limit"), 10));
-        String hql = "from SysRole";
+        String hql = "from SysRole where (:code is null or code like :code) and (:name is null or name like :name)  and (:status is null or status = :status)";
         ParamMap params = new ParamMap();
+        params.putLike("code", this.getParam("code"));
+        params.putLike("name", this.getParam("name"));
+        params.put("status", this.getParam("status"));
         sysRoleService.pageH(page, hql, params);
         return page;
     }
@@ -149,16 +152,10 @@ public class SysRoleController extends BaseController {
      */
     @RequestMapping(params = "method=chkCode")
     @ResponseBody
-    public void chkCode(String code) throws IOException {
+    public Map<String, String> chkCode(String code) throws IOException {
         String hql = "from SysRole where  code = ?";
         boolean isRepeat = sysRoleService.isExist(hql, code);
-        Map<String, String> ret = new HashMap<String, String>();
-        if (isRepeat) {
-            ret.put("error", "对不起，已存在该代码！");
-        } else {
-            ret.put("ok", "该代码可用！");
-        }
-        this.write(ret);
+        return super.isRepeat(isRepeat, "对不起，已存在该代码！", "该代码可用！");
     }
 
     /**

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,33 +13,20 @@ import javax.persistence.Table;
  * 系统日志
  * 
  * @author cielo
- * @date Mon Nov 28 14:10:44 CST 2016
+ * @date 2016-12-06 16:11:58
  */
 @Entity
 @Table(name = "sys_log")
 public class SysLog implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
-
     /**
      * 主键
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
-    private Long id;
-
-    /**
-     * clue
-     */
-    @Column(name = "clue", length = 36, unique = true)
-    private String clue;
-
-    /**
-     * 模块
-     */
-    @Column(name = "module", length = 100, unique = true)
-    private String module;
+    private String id;
 
     /**
      * 时间点
@@ -47,16 +35,10 @@ public class SysLog implements java.io.Serializable {
     private Date time;
 
     /**
-     * 耗时
+     * 模块
      */
-    @Column(name = "cost_time", unique = true)
-    private Integer costTime;
-
-    /**
-     * 内容
-     */
-    @Column(name = "detail", length = 500, unique = true)
-    private String detail;
+    @Column(name = "module", length = 100, unique = true)
+    private String module;
 
     /**
      * 菜单
@@ -65,10 +47,10 @@ public class SysLog implements java.io.Serializable {
     private String menu;
 
     /**
-     * 用户ID
+     * 内容
      */
-    @Column(name = "user_id", length = 255, unique = true)
-    private String userId;
+    @Column(name = "detail", length = 500, unique = true)
+    private String detail;
 
     /**
      * 结果
@@ -77,44 +59,34 @@ public class SysLog implements java.io.Serializable {
     private String result;
 
     /**
-     * 设置 clue
+     * 耗时
      */
-    public void setClue(String clue) {
-        this.clue = clue;
-    }
+    @Column(name = "cost_time", unique = true)
+    private Integer costTime;
 
     /**
-     * 获取 clue
+     * 用户ID
      */
-    public String getClue() {
-        return this.clue;
-    }
+    @Column(name = "user_id", length = 255, unique = true)
+    private String userId;
 
     /**
-     * 设置 模块
+     * 线索ID
      */
-    public void setModule(String module) {
-        this.module = module;
-    }
-
-    /**
-     * 获取 模块
-     */
-    public String getModule() {
-        return this.module;
-    }
+    @Column(name = "clue", length = 36, unique = true)
+    private String clue;
 
     /**
      * 设置 主键
      */
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     /**
      * 获取 主键
      */
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -133,31 +105,17 @@ public class SysLog implements java.io.Serializable {
     }
 
     /**
-     * 设置 耗时
+     * 设置 模块
      */
-    public void setCostTime(Integer costTime) {
-        this.costTime = costTime;
+    public void setModule(String module) {
+        this.module = module;
     }
 
     /**
-     * 获取 耗时
+     * 获取 模块
      */
-    public Integer getCostTime() {
-        return this.costTime;
-    }
-
-    /**
-     * 设置 内容
-     */
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-
-    /**
-     * 获取 内容
-     */
-    public String getDetail() {
-        return this.detail;
+    public String getModule() {
+        return this.module;
     }
 
     /**
@@ -175,17 +133,17 @@ public class SysLog implements java.io.Serializable {
     }
 
     /**
-     * 设置 用户ID
+     * 设置 内容
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     /**
-     * 获取 用户ID
+     * 获取 内容
      */
-    public String getUserId() {
-        return this.userId;
+    public String getDetail() {
+        return this.detail;
     }
 
     /**
@@ -202,11 +160,53 @@ public class SysLog implements java.io.Serializable {
         return this.result;
     }
 
+    /**
+     * 设置 耗时
+     */
+    public void setCostTime(Integer costTime) {
+        this.costTime = costTime;
+    }
+
+    /**
+     * 获取 耗时
+     */
+    public Integer getCostTime() {
+        return this.costTime;
+    }
+
+    /**
+     * 设置 用户ID
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * 获取 用户ID
+     */
+    public String getUserId() {
+        return this.userId;
+    }
+
+    /**
+     * 设置 线索ID
+     */
+    public void setClue(String clue) {
+        this.clue = clue;
+    }
+
+    /**
+     * 获取 线索ID
+     */
+    public String getClue() {
+        return this.clue;
+    }
+
     @Override
     public String toString() {
-        return "SysLog [" + "clue=" + clue + ", " + "module=" + module + ", " + "id=" + id + ", " + "time=" + time
-                + ", " + "costTime=" + costTime + ", " + "detail=" + detail + ", " + "menu=" + menu + ", " + "userId="
-                + userId + ", " + "result=" + result + "]";
+        return "SysLog [" + "id=" + id + ", " + "time=" + time + ", " + "module=" + module + ", " + "menu=" + menu
+                + ", " + "detail=" + detail + ", " + "result=" + result + ", " + "costTime=" + costTime + ", "
+                + "userId=" + userId + ", " + "clue=" + clue + "]";
     }
 
 }

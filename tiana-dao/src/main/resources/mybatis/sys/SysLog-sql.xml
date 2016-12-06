@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 系统管理-系统日志 -->
+<mapper namespace="SysLog">
+
+	<!-- 获取单条数据 -->
+	<select id="getOne" parameterType="java.util.Map" resultType="com.lezic.tiana.app.entity.sys.SysLog">
+		select
+		id id , clue clue , time time , module module , menu menu , detail detail , result result , cost_time costTime , user_id
+		userId from sys_log t
+		where t.id = #{id}
+	</select>
+
+	<!-- 查询多条数据 -->
+	<select id="getPageList" parameterType="java.util.Map" resultType="com.lezic.tiana.app.entity.sys.SysLog">
+		select
+		id id , clue clue , time time , module module , menu menu , detail detail , result result , cost_time costTime , user_id
+		userId from sys_log t
+		where 1=1
+		<if test="id != null and id  != ''"> and t.id = #{id } </if>
+		<if test="clue != null and clue  != ''"> and t.clue = #{clue } </if>
+		<if test="time != null and time  != ''"> and t.time = #{time } </if>
+		<if test="module != null and module  != ''"> and t.module = #{module } </if>
+		<if test="menu != null and menu  != ''"> and t.menu = #{menu } </if>
+		<if test="detail != null and detail  != ''"> and t.detail = #{detail } </if>
+		<if test="result != null and result  != ''"> and t.result = #{result } </if>
+		<if test="costTime != null and costTime  != ''"> and t.cost_time = #{costTime } </if>
+		<if test="userId != null and userId  != ''"> and t.user_id = #{userId } </if>
+	</select>
+
+	<!-- 更新记录 -->
+	<update id="updEntity" parameterType="com.lezic.tiana.app.entity.sys.SysLog">
+		update sys_log t
+		<set>
+			<if test="id != null">t.id=#{id},</if>
+			<if test="clue != null">t.clue=#{clue},</if>
+			<if test="time != null">t.time=#{time},</if>
+			<if test="module != null">t.module=#{module},</if>
+			<if test="menu != null">t.menu=#{menu},</if>
+			<if test="detail != null">t.detail=#{detail},</if>
+			<if test="result != null">t.result=#{result},</if>
+			<if test="costTime != null">t.cost_time=#{costTime},</if>
+			<if test="userId != null">t.user_id=#{userId},</if>
+		</set>
+		where t.id = #{id}
+	</update>
+
+	<!-- 删除记录 -->
+	<delete id="delEntity" parameterType="java.util.Map">
+		delete from sys_log t where
+		t.id = #{id} in
+		<foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

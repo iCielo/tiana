@@ -1,0 +1,148 @@
+/**
+ * <p>Author		:	cielo</p>
+ * <p>Date 			: 	${now}</p>
+ */
+package ${table.controllerPackage};
+
+import java.io.IOException;
+import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import ${table.entityPackage}.${table.entity};
+import ${table.servicePackage}.${table.service};
+import com.lezic.tiana.constant.BaseData;
+import com.lezic.tiana.orm.Page;
+import com.lezic.tiana.orm.ParamMap;
+import com.lezic.tiana.orm.util.HibernateUtil;
+import com.lezic.tiana.util.DataUtil;
+import com.lezic.tiana.web.BaseController;
+
+/**
+ * ${table.moduleName} >  ${table.menuName}  控制器类
+ * @author cielo
+ *
+ */
+@Controller
+@RequestMapping("${table.controllerUrl}")
+public class ${table.controller} extends BaseController {
+
+	@Autowired
+	private ${table.service} ${table.serviceBean};
+
+	/**
+	 * 列表页面
+	 * 
+	 * @param model
+	 * @return
+	 * @author cielo
+	 */
+	@RequestMapping(params = "method=list", method = RequestMethod.GET)
+	public String listPage() {
+		return "${table.listJsp}";
+	}
+
+	/**
+	 * 新增页面
+	 */
+	@RequestMapping(params = "method=add", method = RequestMethod.GET)
+	public String addPage() {
+		return "${table.addJsp}";
+	}
+
+	/**
+	 * 修改页面
+	 */
+	@RequestMapping(params = "method=upd", method = RequestMethod.GET)
+	public String updPage(Model model) {
+		String id = this.getParam("id");
+		if (DataUtil.isNotNull(id)) {
+			model.addAttribute("entity", ${table.serviceBean}.getH(id));
+		}
+		return "${table.updJsp}";
+	}
+
+	/**
+	 * 列表页面
+	 * 
+	 * @param model
+	 * @return
+	 * @author cielo
+	 * @throws IOException
+	 */
+	@RequestMapping(params = "method=loadData", method = RequestMethod.GET)
+	@ResponseBody
+	public Page<${table.entity}> loadData(@ModelAttribute ${table.entity} entityParams) throws IOException {
+		Page<${table.entity}> page = new Page<${table.entity}>();
+		page.setOffset(DataUtil.integerOfString(this.getParam("offset"), 0));
+		page.setPageSize(DataUtil.integerOfString(this.getParam("limit"), 10));
+		ParamMap params = new ParamMap();
+		${table.serviceBean}.pageM(page, "${table.entity}.getPageList", params);
+		return page;
+	}
+
+	/**
+	 * 新增
+	 * 
+	 * @throws IOException
+	 */
+	@RequestMapping(params = "method=addEntity")
+	@ResponseBody
+	public BaseData addEntity(@ModelAttribute ${table.entity} entity) throws IOException {
+		${table.serviceBean}.saveH(entity);
+		return new BaseData();
+	}
+
+	/**
+	 * 修改
+	 * 
+	 * @throws IOException
+	 */
+	@RequestMapping(params = "method=updEntity")
+	public BaseData updEntity(@ModelAttribute ${table.entity} item) throws IOException {
+		if (item != null) {
+			${table.entity} entity = ${table.serviceBean}.getH(item.getId());
+			HibernateUtil.copyExcludeNull(entity, item);
+			${table.serviceBean}.updH(entity);
+		}
+		return new BaseData();
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @throws IOException
+	 */
+	@RequestMapping(params = "method=delEntity")
+	@ResponseBody
+	public BaseData delEntity() throws IOException {
+		Long[] ids = DataUtil.splitToLong(this.getParam("ids"), ",");
+		${table.serviceBean}.batchDelH(${table.entity}.class, ids);
+		 return new BaseData();
+	}
+
+	/**
+	 * 判断名称是否重复
+	 * 
+	 * @throws IOException
+	 * @author cielo
+	 */
+	@RequestMapping(params = "method=isRepeat")
+	@ResponseBody
+	public Map<String, String> isRepeat() throws IOException {
+		String id = this.getParam("id");
+		String account = this.getParam("account");
+		String hql = "from ${table.entity} where  (id != ? or ? is null) and account = ?";
+		boolean isRepeat = ${table.serviceBean}.isExist(hql, id, id, account);
+		return super.isRepeat(isRepeat, "对不起，已存在该字典！", "该字典可用！");
+	}
+
+}

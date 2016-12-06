@@ -30,7 +30,6 @@
 <!--基础js-->
 <script type="text/javascript" src="${CP}/static/js/lib/jquery/jquery.js"></script>
 <script type="text/javascript" src="${CP}/static/js/lib/jquery/jquery.form.js"></script>
-<script type="text/javascript" src="${CP }/static/js/lib/flatlab/js/jquery.nicescroll.js"></script>
 
 <!-- layer -->
 <script type="text/javascript" src="${CP}/static/js/lib/layer/layer.js"></script>

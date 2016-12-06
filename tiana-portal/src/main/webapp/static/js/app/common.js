@@ -17,16 +17,13 @@
 		if (option.success) {
 			delete option.success;
 		}
-		if (option.url && option.url.indexOf("ajax=true")) {
-			option.url = option.url + "&ajax=true";
-		}
 		var defaultOption = {
 			url : "",
 			type : "post",
 			async : true,
 			dataType : "json",
 			data : {
-
+				
 			},
 			/**
 			 * 成功回调方法：再原有的基础上包上一层检测超时、禁止访问等
@@ -57,6 +54,7 @@
 			}
 		};
 		option = $.extend(true, {}, defaultOption, option);
+		option.data.ajax=true;
 		$.ajax(option);
 	};
 }(window));

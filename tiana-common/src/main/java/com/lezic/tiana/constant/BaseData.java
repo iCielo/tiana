@@ -20,6 +20,17 @@ public class BaseData {
     private String msg;
 
     /**
+     * 成功标识
+     * 
+     * @return
+     * @author lincl
+     * @date 2016年12月6日 下午6:02:16
+     */
+    public boolean isSuccess() {
+        return StatusCode.SUCCESS.equals(code);
+    }
+
+    /**
      * 构造方法
      */
     public BaseData() {

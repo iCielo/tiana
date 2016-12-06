@@ -28,7 +28,7 @@
 						<ul class="dropDown-menu menu radius box-shadow">
 							<li><a href="#">个人信息</a></li>
 							<li><a href="#">切换账户</a></li>
-							<li><a href="#">退出</a></li>
+							<li><a href="${CP }/logout">退出</a></li>
 						</ul>
 					</li>
 					<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
@@ -54,17 +54,8 @@
 			<dt><i class="Hui-iconfont">&#xe616;</i> 代码工厂<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="article-list.html" data-title="资讯管理" href="javascript:void(0)">资讯管理</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-admin">
-			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a data-href="${CP }/sys/role.do?method=list" data-title="角色管理" href="javascript:void(0)">角色管理</a></li>
-					<li><a data-href="admin-permission.html" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
-					<li><a data-href="admin-list.html" data-title="管理员列表" href="javascript:void(0)">管理员列表</a></li>
+					<li><a data-href="${CP }/crud/table.do?method=list" data-title="数据库表" href="javascript:;">数据库表</a></li>
+					<li><a data-href="${CP }/crud/column.do?method=list" data-title="表字段" href="javascript:;">表字段</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -72,20 +63,21 @@
 			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="${CP }/sys/dictionary.do?method=list" data-title="数据字典" href="javascript:void(0)">数据字典</a></li>
-					<li><a data-href="system-shielding.html" data-title="屏蔽词" href="javascript:void(0)">屏蔽词</a></li>
-					<li><a data-href="system-log.html" data-title="系统日志" href="javascript:void(0)">系统日志</a></li>
+					<li><a data-href="${CP }/sys/user.do?method=list" data-title="系统用户" href="javascript:;">系统用户</a></li>
+					<li><a data-href="${CP }/sys/role.do?method=list" data-title="角色管理" href="javascript:;">角色管理</a></li>
+					<li><a data-href="${CP }/sys/dictionary.do?method=list" data-title="数据字典" href="javascript:;">数据字典</a></li>
+					<li><a data-href="${CP }/sys/log.do?method=list" data-title="系统日志" href="javascript:;">系统日志</a></li>
 				</ul>
 			</dd>
 		</dl>
 	</div>
 </aside>
-<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:;;" onClick="displaynavbar(this)"></a></div>
 <section class="Hui-article-box">
 	<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
 		<div class="Hui-tabNav-wp">
 			<ul id="min_title_list" class="acrossTab cl">
-				<li class="active"><span title="我的桌面" data-href="${CP}/home/welcome">我的桌面</span><em></em></li>
+				<li class="active"><span title="我的桌面" data-href="${CP}/welcome">我的桌面</span><em></em></li>
 			</ul>
 		</div>
 		<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
@@ -93,7 +85,7 @@
 	<div id="iframe_box" class="Hui-article">
 		<div class="show_iframe">
 			<div style="display:none" class="loading"></div>
-			<iframe scrolling="yes" frameborder="0" src="${CP}/home/welcome"></iframe>
+			<iframe scrolling="yes" frameborder="0" src="${CP}/welcome"></iframe>
 		</div>
 	</div>
 </section>

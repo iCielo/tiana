@@ -5,7 +5,6 @@
 package com.lezic.tiana.app.action.sys;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -143,19 +142,13 @@ public class SysDictionaryController extends BaseController {
 	 */
 	@RequestMapping(params = "method=chkDictKey")
 	@ResponseBody
-	public void chkDictKey() throws IOException {
+	public Map<String, String> chkDictKey() throws IOException {
 		String id = this.getParam("id");
 		String sort = this.getParam("sort");
 		String dictKey = this.getParam("dictKey");
 		String hql = "from SysDictionary where  (id != ? or ? is null) and sort = ? and (dictKey = ? or ? is null)";
 		boolean isRepeat = sysDictionaryService.isExist(hql, id, id, sort, dictKey, dictKey);
-		Map<String, String> ret = new HashMap<String, String>();
-		if (isRepeat) {
-			ret.put("error", "对不起，已存在该字典！");
-		} else {
-			ret.put("ok", "该字典可用！");
-		}
-		this.write(ret);
+		return super.isRepeat(isRepeat, "对不起，已存在该字典！", "该字典可用！");
 	}
 
 	/**

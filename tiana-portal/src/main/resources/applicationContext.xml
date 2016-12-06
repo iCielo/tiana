@@ -58,6 +58,10 @@
 			<mvc:mapping path="/**/*" />
 			<bean class="com.lezic.tiana.web.interceptor.RequestLogInterceptor" />
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/*" />
+			<bean class="com.lezic.tiana.portal.interceptor.AuthorizationInterceptor" />
+		</mvc:interceptor>
 		<!--国际化资源切换（根据请求参数中的locale参数自动切换） -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />

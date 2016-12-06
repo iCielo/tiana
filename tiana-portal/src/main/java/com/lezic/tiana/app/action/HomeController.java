@@ -19,8 +19,13 @@ import com.lezic.tiana.web.BaseController;
  * 
  */
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/")
 public class HomeController extends BaseController {
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String index(Model model) {
+        return "/index";
+    }
 
     @RequestMapping(value = "welcome", method = RequestMethod.GET)
     public String listPage(Model model) {

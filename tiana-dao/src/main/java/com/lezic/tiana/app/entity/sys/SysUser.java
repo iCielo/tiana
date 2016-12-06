@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -32,11 +34,12 @@ public class SysUser implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	/**
-	 * uuid主键
+	 * 主键
 	 */
-	@Id
-	@Column(name = "id", length = 36, nullable = false)
-	private String id;
+    @Id
+    @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO) 
+    private Long id;
 
 	/**
 	 * 操作用户ID
@@ -101,14 +104,14 @@ public class SysUser implements java.io.Serializable {
 	/**
 	 * 设置 uuid主键
 	 */
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	/**
 	 * 获取 uuid主键
 	 */
-	public String getId() {
+	public Long getId() {
 		return this.id;
 	}
 

@@ -5,6 +5,7 @@
 package com.lezic.tiana.orm.dao.impl;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -205,6 +206,7 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 			page.setRows(query.list());
 			logger.debug("总记录数：" + total + "，当前页：" + page.getPageNumber() + "，本页条数：" + page.getRows().size());
 		} else {
+		    page.setRows(Collections.emptyList());
 			logger.debug("没有找到匹配的记录");
 		}
 	}

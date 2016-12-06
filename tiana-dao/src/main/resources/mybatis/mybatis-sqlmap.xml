@@ -6,5 +6,6 @@
 		<mapper resource="mybatis/framework-sqlmap.xml" />
 		<mapper resource="mybatis/sys/SysUser-sql.xml" />
 		<mapper resource="mybatis/sys/SysDictionary-sql.xml" />
+		<mapper resource="mybatis/sys/SysLog-sql.xml" />
 	</mappers>
 </configuration>

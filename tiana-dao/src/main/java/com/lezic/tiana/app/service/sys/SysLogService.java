@@ -1,6 +1,6 @@
 /**
  * <p>Author		:	cielo</p>
- * <p>Date 			: 	Mon Nov 28 13:58:05 CST 2016</p>
+ * <p>Date 			: 	2016-12-06 16:00:06</p>
  */
 package com.lezic.tiana.app.service.sys;
 
@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lezic.tiana.app.entity.sys.SysLog;
 import com.lezic.tiana.orm.service.BaseService;
 
-
 /**
+ * 系统管理 >  系统日志  服务类
  * @author cielo
  *
  */

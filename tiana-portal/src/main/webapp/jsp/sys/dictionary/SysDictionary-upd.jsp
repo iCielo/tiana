@@ -62,7 +62,7 @@
 			<div class="row cl">
 				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 					<button type="submit" class="btn btn-success radius" ><i class="icon-ok"></i> 确定</button>
-					<button type="submit" class="btn btn-success radius"  onclick="MyLayer.close();"><i class="icon-cancel"></i> 关闭</button>
+					<button type="submit" class="btn btn-default radius"  onclick="MyLayer.close();"><i class="icon-cancel"></i> 关闭</button>
 				</div>
 			</div>
 		</form>

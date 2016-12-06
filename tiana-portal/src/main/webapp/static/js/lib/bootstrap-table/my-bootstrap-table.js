@@ -34,12 +34,12 @@
 				return false;
 			}
 		}
-	}
+	};
 
 	$.fn.myBootstrapTable = function(option) {
 		myBootstrapTable.bootstrapTable = $(this);
 		option = $.extend(true, {}, myBootstrapTable.option, option);
 		return $(this).bootstrapTable(option);
-	}
+	};
 
 })(jQuery);

@@ -26,80 +26,100 @@ import com.lezic.tiana.web.util.ContextUtil;
  * 控制器基类
  * 
  * @author cielo
- *
+ * 
  */
 public abstract class BaseController {
 
-	private Logger logger = LogManager.getLogger(BaseController.class);
+    private Logger logger = LogManager.getLogger(BaseController.class);
 
-	/**
-	 * 获取表单参数
-	 * 
-	 * @param name
-	 * @return
-	 * @author cielo
-	 */
-	public String getParam(String name) {
-		String str = DataUtil.trim(ContextUtil.getCurrentRequest().getParameter(name));
-		if (DataUtil.isNull(str)) {
-			return null;
-		}
-		return str;
-	}
+    /**
+     * 获取表单参数
+     * 
+     * @param name
+     * @return
+     * @author cielo
+     */
+    public String getParam(String name) {
+        String str = DataUtil.trim(ContextUtil.getCurrentRequest().getParameter(name));
+        if (DataUtil.isNull(str)) {
+            return null;
+        }
+        return str;
+    }
 
-	/**
-	 * 获取表单参数
-	 * 
-	 * @param name
-	 * @param defaultStr
-	 * @return
-	 * @author cielo
-	 */
-	public String getParam(String name, String defaultStr) {
-		String str = getParam(name);
-		return str == null ? defaultStr : str;
-	}
+    /**
+     * 获取表单参数
+     * 
+     * @param name
+     * @param defaultStr
+     * @return
+     * @author cielo
+     */
+    public String getParam(String name, String defaultStr) {
+        String str = getParam(name);
+        return str == null ? defaultStr : str;
+    }
 
-	/**
-	 * 将指定对象转为ajax字符串写入response
-	 * 
-	 * @param object
-	 * @throws IOException
-	 */
-	public void write(Object object) {
-	    HttpServletResponse response = ContextUtil.getCurrentResponse();
-		response.setContentType("application/json;charset=UTF-8");
-		// response.setContentType("text/xml;charset=UTF-8");
-		try {
-			if (object instanceof Collection) {
-				JSONArray jsonArray = JSONArray.fromObject(object);
-				response.getWriter().write(jsonArray.toString());
-			} else {
-				JSONObject jsonObject = JSONObject.fromObject(object);
-				response.getWriter().write(jsonObject.toString());
-			}
-		} catch (Exception e) {
-			logger.error("系统错误！", e);
-		}
-	}
+    /**
+     * 将指定对象转为ajax字符串写入response
+     * 
+     * @param object
+     * @throws IOException
+     */
+    public void write(Object object) {
+        HttpServletResponse response = ContextUtil.getCurrentResponse();
+        response.setContentType("application/json;charset=UTF-8");
+        // response.setContentType("text/xml;charset=UTF-8");
+        try {
+            if (object instanceof Collection) {
+                JSONArray jsonArray = JSONArray.fromObject(object);
+                response.getWriter().write(jsonArray.toString());
+            } else {
+                JSONObject jsonObject = JSONObject.fromObject(object);
+                response.getWriter().write(jsonObject.toString());
+            }
+        } catch (Exception e) {
+            logger.error("系统错误！", e);
+        }
+    }
 
-	/**
-	 * 输出bootstrap table的数据
-	 * 
-	 * @param page
-	 * @throws IOException
-	 * @author cielo
-	 */
-	public void outBootstrapTable(Page<?> page) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		if (DataUtil.isEmpty(page.getRows())) {
-			map.put("rows", new ArrayList<Object>());
-		} else {
-			map.put("rows", page.getRows());
-		}
+    /**
+     * 输出bootstrap table的数据
+     * 
+     * @param page
+     * @throws IOException
+     * @author cielo
+     */
+    public void outBootstrapTable(Page<?> page) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (DataUtil.isEmpty(page.getRows())) {
+            map.put("rows", new ArrayList<Object>());
+        } else {
+            map.put("rows", page.getRows());
+        }
 
-		map.put("total", page.getTotal());
-		this.write(map);
-	}
+        map.put("total", page.getTotal());
+        this.write(map);
+    }
+
+    /**
+     * 返回是否记录重复的结果
+     * 
+     * @param isRepeat
+     * @param error
+     * @param ok
+     * @return
+     * @author lincl
+     * @date 2016年12月6日 上午10:24:02
+     */
+    public Map<String, String> isRepeat(boolean isRepeat, String error, String ok) {
+        Map<String, String> ret = new HashMap<String, String>();
+        if (isRepeat) {
+            ret.put("error", error);
+        } else {
+            ret.put("ok", ok);
+        }
+        return ret;
+    }
 
 }
