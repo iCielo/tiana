@@ -51,7 +51,7 @@
 <script type="text/javascript" src="${CP}/static/js/lib/h-ui/js/H-ui.js"></script> 
 <script type="text/javascript" src="${CP}/static/js/lib/h-ui.admin/js/H-ui.admin.js"></script> 
 <script type="text/javascript" src="${CP}/static/js/lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script> 
-<link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/h-ui/css/H-ui.css" />
 <link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/h-ui.admin/css/H-ui.admin.css" />
 <link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/Hui-iconfont/1.0.7/iconfont.css" />
 <link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/icheck/icheck.css" />

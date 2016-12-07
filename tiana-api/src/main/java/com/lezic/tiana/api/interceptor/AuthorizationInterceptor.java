@@ -1,7 +1,6 @@
 package com.lezic.tiana.api.interceptor;
 
 import java.lang.reflect.Method;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,12 +12,11 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.lezic.tiana.api.annotation.Authorization;
 import com.lezic.tiana.api.service.TokenService;
-import com.lezic.tiana.api.service.WhiteIPService;
 import com.lezic.tiana.api.vo.Token;
 import com.lezic.tiana.app.constant.Constants;
 import com.lezic.tiana.constant.SimpleData;
 import com.lezic.tiana.constant.StatusCode;
-import com.lezic.tiana.web.constant.WebConstant;
+import com.lezic.tiana.web.service.WhiteIPService;
 import com.lezic.tiana.web.util.ResponseUtil;
 
 /**
