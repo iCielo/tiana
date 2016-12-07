@@ -94,6 +94,7 @@
 		$("form input,form select").each(function(i, obj) {
 			params[$(obj).prop("name")] = $(obj).val().trim();
 		});
+		params["ajax"]=true;
 		return params;
 	}
 

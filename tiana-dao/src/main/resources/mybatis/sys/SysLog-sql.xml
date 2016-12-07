@@ -26,6 +26,7 @@
 		<if test="result != null and result  != ''"> and t.result = #{result } </if>
 		<if test="costTime != null and costTime  != ''"> and t.cost_time = #{costTime } </if>
 		<if test="userId != null and userId  != ''"> and t.user_id = #{userId } </if>
+		order by t.time desc
 	</select>
 
 	<!-- 更新记录 -->

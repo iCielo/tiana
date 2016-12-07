@@ -79,7 +79,7 @@
 				</div>
 			</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>输入提示：</label>
+				<label class="form-label col-xs-4 col-sm-3">输入提示：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input class="form-control" type="text" id="placeholder" name="placeholder"
 							value="<c:out value="${entity.placeholder}"/>">
@@ -101,13 +101,13 @@
 				</div>
 			</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>校验规则：</label>
+				<label class="form-label col-xs-4 col-sm-3">校验规则：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input class="form-control" type="text" id="rules" name="rules" value="<c:out value="${entity.rules}"/>">
 				</div>
 			</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>数据字典类型：</label>
+				<label class="form-label col-xs-4 col-sm-3">数据字典类型：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<select class="form-control" id="dictType" name="dictType" data-option-value="${entity.dictType}">
 							<option value="">--请选择--</option>
@@ -118,7 +118,7 @@
 				</div>
 			</div>
 			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>自定义数据字典：</label>
+				<label class="form-label col-xs-4 col-sm-3">自定义数据字典：</label>
 				<div class="formControls col-xs-8 col-sm-9">
 					<input class="form-control" type="text" id="dictList" name="dictList" value="<c:out value="${entity.dictList}"/>">
 				</div>

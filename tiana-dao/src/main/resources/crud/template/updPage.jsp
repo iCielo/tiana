@@ -32,18 +32,14 @@
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">#if( ${item.nullable} != 1 )<span class="c-red">*</span>#end ${item.label}：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						#if( ${item.inputType} == 'input' )
-							<input class="input-text"#if( ${item.placeholder} ) placeholder="${item.placeholder}" #end type="input" id="${item.javaName}" name="${item.javaName}"  value="<c:out value="${mark}${entity}.$item.javaName}"/>"/>
+						#if( ${item.inputType} == 'text' )
+							<input class="input-text"#if( ${item.placeholder} ) placeholder="${item.placeholder}" #end type="text" id="${item.javaName}" name="${item.javaName}"  value="<c:out value="${mark}${entity}.$item.javaName}"/>"/>
 						#end
 						#if( ${item.inputType} == 'textarea' )
 							<textarea class="textarea"#if( ${item.placeholder} ) placeholder="${item.placeholder}" #end id="${item.javaName}" name="${item.javaName}">${mark}${entity}.$item.javaName}</textarea>
 						#end
 						#if( ${item.inputType} == 'select' )
-							<span class="select-box">
-							<select class="select" id="${item.javaName}" name="${item.javaName}" data-option-value="${mark}${entity}.$item.javaName}">
-								<option value="">--请选择--</option>
-							</select>
-							</span>
+							<span class="select-box"><dict:select cssClass="select" sort="${item.dictType}"  id="${item.javaName}" name="${item.javaName}"  key="${mark}${entity}.$item.javaName}"/></span>
 						#end
 						#if( ${item.inputType} == 'radio' )
 							<input type="radio"  id="${item.javaName}" name="${item.javaName}"/>${item.label}

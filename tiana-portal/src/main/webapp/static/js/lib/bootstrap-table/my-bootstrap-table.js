@@ -32,6 +32,13 @@
 					}
 				}
 				return false;
+			},
+			responseHandler : function(res) {
+				if(res&&res.code=="TIMEOUT"){
+					window.location.href = CP + "/jsp/timeout.jsp";
+					return;
+				}
+				return res;
 			}
 		}
 	};

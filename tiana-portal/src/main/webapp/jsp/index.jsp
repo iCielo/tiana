@@ -65,6 +65,7 @@
 				<ul>
 					<li><a data-href="${CP }/sys/user.do?method=list" data-title="系统用户" href="javascript:;">系统用户</a></li>
 					<li><a data-href="${CP }/sys/role.do?method=list" data-title="角色管理" href="javascript:;">角色管理</a></li>
+					<li><a data-href="${CP }/sys/resource.do?method=list" data-title="资源菜单" href="javascript:;">资源菜单</a></li>
 					<li><a data-href="${CP }/sys/dictionary.do?method=list" data-title="数据字典" href="javascript:;">数据字典</a></li>
 					<li><a data-href="${CP }/sys/log.do?method=list" data-title="系统日志" href="javascript:;">系统日志</a></li>
 				</ul>

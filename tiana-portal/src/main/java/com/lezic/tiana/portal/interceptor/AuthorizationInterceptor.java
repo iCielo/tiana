@@ -3,12 +3,16 @@ package com.lezic.tiana.portal.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.lezic.tiana.app.entity.sys.SysUser;
+import com.lezic.tiana.constant.BaseData;
+import com.lezic.tiana.constant.StatusCode;
 import com.lezic.tiana.web.cache.SessionCache;
 import com.lezic.tiana.web.service.WhiteIPService;
 
@@ -42,7 +46,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
         String ctx = request.getContextPath();
-       
+
         if (request.getRequestURI().startsWith(ctx + "/login")) {// 放过登录
             return true;
         }
@@ -53,10 +57,17 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
 
-        //判断是否已登录
+        // 判断是否已登录
         SysUser sysUser = SessionCache.getUser();
         if (sysUser == null) {
-            response.sendRedirect(request.getContextPath() + "/jsp/timeout.jsp");
+            boolean ajax = "true".equals(request.getParameter("ajax"));
+            if (ajax) {
+                BaseData bd = new BaseData(StatusCode.TIMEOUT);
+                JSONObject jsonObject = JSONObject.fromObject(bd);
+                response.getWriter().write(jsonObject.toString());
+            } else {
+                response.sendRedirect(request.getContextPath() + "/jsp/timeout.jsp");
+            }
             return false;
         }
         return super.preHandle(request, response, handler);

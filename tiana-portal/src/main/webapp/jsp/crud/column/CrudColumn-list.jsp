@@ -73,7 +73,7 @@
 	<div class="page-container">
 		<div class="search">
 			<form class="form-horizontal" onsubmit="return false;">
-			<input type="text" class="input-text" placeholder="表名" id="tableName" name="tableName" >
+			<input type="text" class="input-text" placeholder="表名" id="tableName" name="tableName" value="${param.tableName }">
 			<button type="submit" class="btn btn-success" id="" name="">
 				<i class="fa fa-search"></i> 查询
 			</button>

@@ -73,6 +73,7 @@ public class SysDictionaryService extends BaseService<SysDictionary> {
 	@Override
 	public void updH(SysDictionary entity) {
 		super.updH(entity);
+		initCache();
 	}
 
 	@Override

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 系统管理-资源菜单  -->
+<mapper namespace="SysResource">
+
+	<!-- 获取单条数据 -->
+	<select id="getOne" parameterType="java.util.Map" resultType="com.lezic.tiana.app.entity.sys.SysResource">
+		select
+					id id ,					code code ,					name name ,					url url ,					parent_code parentCode ,					type type ,					op_user_id opUserId ,					op_time opTime 				from sys_resource t
+					 where t.id = #{id}  																																						</select>
+	
+	<!-- 查询多条数据 -->
+	<select id="getPageList" parameterType="java.util.Map" resultType="com.lezic.tiana.app.entity.sys.SysResource">
+		select
+					id id  ,					code code  ,					name name  ,					url url  ,					parent_code parentCode  ,					type type  ,					op_user_id opUserId  ,					op_time opTime  				from sys_resource t
+		where 1=1
+					<if test="id != null and id  != ''"> and t.id  = #{id } </if>
+					<if test="code != null and code  != ''"> and t.code  = #{code } </if>
+					<if test="name != null and name  != ''"> and t.name  = #{name } </if>
+					<if test="url != null and url  != ''"> and t.url  = #{url } </if>
+					<if test="parentCode != null and parentCode  != ''"> and t.parent_code  = #{parentCode } </if>
+					<if test="type != null and type  != ''"> and t.type  = #{type } </if>
+					<if test="opUserId != null and opUserId  != ''"> and t.op_user_id  = #{opUserId } </if>
+					<if test="opTime != null and opTime  != ''"> and t.op_time  = #{opTime } </if>
+			</select>
+	
+	<!-- 更新记录 -->
+	<update id="updEntity" parameterType="com.lezic.tiana.app.entity.sys.SysResource">
+		update sys_resource t
+		<set>
+							<if test="id != null">t.id=#{id},</if>
+							<if test="code != null">t.code=#{code},</if>
+							<if test="name != null">t.name=#{name},</if>
+							<if test="url != null">t.url=#{url},</if>
+							<if test="parentCode != null">t.parent_code=#{parentCode},</if>
+							<if test="type != null">t.type=#{type},</if>
+							<if test="opUserId != null">t.op_user_id=#{opUserId},</if>
+							<if test="opTime != null">t.op_time=#{opTime},</if>
+					</set>
+					 where t.id = #{id}  																																						</update>
+	
+	<!-- 删除记录 -->
+	<delete id="delEntity" parameterType="java.util.Map">
+		delete from sys_resource t where
+					 t.id = #{id}   			 			 			 			 			 			 			  in
+			<foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+				#{id}
+			</foreach>
+	</delete>
+	
+</mapper>

@@ -7,5 +7,5 @@
 
 > 数据库定义
 
-1. positive用1，negative用0.如有效、启用: 1，无效、禁用：0
-2. 
+1. 数据库初始化脚本 database > lezic.sql
+2. positive用1，negative用0.如有效、启用: 1，无效、禁用：0
