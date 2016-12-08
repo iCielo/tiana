@@ -18,6 +18,7 @@
 <script type="text/javascript" src="${CP}/static/js/lib/PIE-2.0beta1/PIE_IE678.js"></script>
 <![endif]-->
 <script type="text/javascript" src="${CP}/static/js/lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${CP}/static/js/lib/cryption/jquery.md5.js"></script>
 <script type="text/javascript" src="${CP}/static/js/lib/h-ui/js/H-ui.js"></script> 
 <!-- layer -->
 <script type="text/javascript" src="${CP}/static/js/lib/layer/layer.js"></script>
@@ -54,7 +55,10 @@ $(function(){
 	$('#form').on('valid.form', function(e) {
 		Common.ajax({
 			url : "${CP}/doLogin",
-			data : $(this).serialize(),
+			data : {
+				account : $("#account").val().trim(),
+				password : $.md5($("#password").val().trim())
+			},
 			success : function(data) {
 				if(data.success){
 					window.location.href="${CP}";

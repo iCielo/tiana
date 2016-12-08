@@ -18,6 +18,7 @@ import com.lezic.tiana.app.service.sys.SysUserService;
 import com.lezic.tiana.constant.BaseData;
 import com.lezic.tiana.constant.StatusCode;
 import com.lezic.tiana.util.DataUtil;
+import com.lezic.tiana.util.MD5Util;
 import com.lezic.tiana.web.BaseController;
 import com.lezic.tiana.web.cache.SessionCache;
 
@@ -59,6 +60,7 @@ public class LoginController extends BaseController {
         if (DataUtil.isNull(password)) {
             return new BaseData(StatusCode.APP_1001, "请输入密码！");
         }
+//        password = MD5Util.getMD5(password);
         SysUser sysUser = (SysUser) sysUserService.findOneH("from SysUser where account = ? and password = ?", true,
                 account, password);
         if (sysUser == null) {

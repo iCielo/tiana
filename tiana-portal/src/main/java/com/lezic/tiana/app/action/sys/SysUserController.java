@@ -26,6 +26,7 @@ import com.lezic.tiana.orm.Page;
 import com.lezic.tiana.orm.ParamMap;
 import com.lezic.tiana.orm.util.HibernateUtil;
 import com.lezic.tiana.util.DataUtil;
+import com.lezic.tiana.util.MD5Util;
 import com.lezic.tiana.web.BaseController;
 
 /**
@@ -103,6 +104,7 @@ public class SysUserController extends BaseController {
     @RequestMapping(params = "method=addEntity")
     @ResponseBody
     public BaseData addEntity(@ModelAttribute SysUser entity) throws IOException {
+        entity.setPassword(MD5Util.getMD5(entity.getPassword()));
         sysUserService.saveH(entity);
         return new BaseData();
     }
