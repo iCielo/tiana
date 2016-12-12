@@ -14,15 +14,19 @@
 		//页面路径，如/sys/user.do
 		var baseUrl = window.location.href.substring(0,window.location.href.indexOf(".do")+3);
 		
-		$('#form').on('valid.form', function(e) {
+		$('#form').on('valid.form', function(e,form) {
 			var url = $(this).attr("action") ? $(this).attr("action") : baseUrl + "?method=addEntity";
 			if($("#id").size()!=0&&$("#id").val()!=""){
 				url = $(this).attr("action") ? $(this).attr("action") : baseUrl + "?method=updEntity";
 			}
+			var me = $(form).data('validator');
+	        // Before submitting the form, hold form, to prevent duplicate submission.
+	        me.holdSubmit();
 			Common.ajax({
 				url : url,
 				data : $(this).serialize(),
 				success : function(data) {
+					me.holdSubmit(false);
 					if (typeof (parent.query) == 'function') {
 						parent.query();
 					}
