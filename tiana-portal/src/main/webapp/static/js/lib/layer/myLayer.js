@@ -16,13 +16,13 @@
 	 */
 	MyLayer.open = function(options, winDom) {
 		if (typeof (winDom) == 'undefined') {
-			winDom = window;//winDom = top;
+			winDom = window;// winDom = top;
 		}
 		var defaultOption = {
 			type : 2,
 			title : '标题',
 			shadeClose : true,
-			maxmin: true,
+			maxmin : true,
 			shade : 0.4,
 			area : [ '50%', '50%' ],
 			content : ''// 可以是iframe的url
@@ -40,7 +40,7 @@
 	 */
 	MyLayer.close = function(winDom) {
 		if (typeof (winDom) == 'undefined') {
-			winDom = parent;//winDom = top;
+			winDom = parent;// winDom = top;
 		}
 		var index = winDom.layer.getFrameIndex(window.name); // 先得到当前iframe层的索引
 		winDom.layer.close(index); // 再执行关闭
@@ -58,7 +58,7 @@
 	 */
 	MyLayer.alert = function(content, options, yes, winDom) {
 		if (typeof (winDom) == 'undefined') {
-			winDom = window;//winDom = top;
+			winDom = window;// winDom = top;
 		}
 		return winDom.layer.alert(content, options, yes);
 	};
@@ -78,7 +78,7 @@
 	 */
 	MyLayer.confirm = function(content, yes, cancel, options, winDom) {
 		if (typeof (winDom) == 'undefined') {
-			winDom = window;//winDom = top;
+			winDom = window;// winDom = top;
 		}
 		var defaultOption = {
 			btn : [ '确认', '取消' ]
@@ -118,8 +118,36 @@
 	 */
 	MyLayer.msg = function(content, options, end, winDom) {
 		if (typeof (winDom) == 'undefined') {
-			winDom = window;//winDom = top;
+			winDom = window;// winDom = top;
 		}
 		return winDom.layer.msg(content, options, end);
 	};
+
+	/**
+	 * 显示加载的遮罩层
+	 * 
+	 * @returns index 用于关闭
+	 */
+	MyLayer.showLoading = function() {
+		if (typeof (winDom) == 'undefined') {
+			winDom = window;// winDom = top;
+		}
+		return winDom.layer.load(0, {
+			shade : [ 0.4, '#fff' ],// 0.1透明度的白色背景
+		});
+	};
+
+	/**
+	 * 关闭加载的遮罩层
+	 * 
+	 * @param index
+	 *            索引
+	 */
+	MyLayer.closeLoading = function(index) {
+		if (typeof (winDom) == 'undefined') {
+			winDom = window;// winDom = top;
+		}
+		winDom.layer.close(index);
+	};
+
 }(window));

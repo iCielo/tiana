@@ -22,11 +22,14 @@
 			var me = $(form).data('validator');
 	        // Before submitting the form, hold form, to prevent duplicate submission.
 	        me.holdSubmit();
+	      	//loading层
+	        var index = MyLayer.showLoading();
 			Common.ajax({
 				url : url,
 				data : $(this).serialize(),
 				success : function(data) {
 					me.holdSubmit(false);
+					MyLayer.closeLoading(index);
 					if (typeof (parent.query) == 'function') {
 						parent.query();
 					}
