@@ -15,14 +15,24 @@
 		var baseUrl = window.location.href.substring(0,window.location.href.indexOf(".do")+3);
 		
 		$('#form').on('valid.form', function(e,form) {
+			var self = this;
 			var url = $(this).attr("action") ? $(this).attr("action") : baseUrl + "?method=addEntity";
 			if($("#id").size()!=0&&$("#id").val()!=""){
 				url = $(this).attr("action") ? $(this).attr("action") : baseUrl + "?method=updEntity";
 			}
+			
+			//使表单内所有按键都失灵，如Tab等。防止表单变更。
+	        var readonly = function(event){
+				if(Common.isF1ToF12(event)){
+					return true;
+				}
+				return false;	
+	        };
+	        $(self).keydown(readonly);
+	        //防止表单重复提交
 			var me = $(form).data('validator');
-	        // Before submitting the form, hold form, to prevent duplicate submission.
 	        me.holdSubmit();
-	      	//loading层
+	      	//提示提交中的loading层
 	        var index = MyLayer.showLoading();
 			Common.ajax({
 				url : url,
@@ -30,6 +40,7 @@
 				success : function(data) {
 					me.holdSubmit(false);
 					MyLayer.closeLoading(index);
+					 $(self).unbind("keydown",readonly);
 					if (typeof (parent.query) == 'function') {
 						parent.query();
 					}

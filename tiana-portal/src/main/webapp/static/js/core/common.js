@@ -51,4 +51,31 @@
 		}
 		return false;
 	};
+
+	/**
+	 * 是否Tab键
+	 * 
+	 * @param event
+	 * @returns {Boolean}
+	 */
+	Common.isTab = function(event) {
+		if (Common.isAppointKey(event,9)) {
+			return true;
+		}
+		return false;
+	};
+	
+	/**
+	 * 是否F1...F12等功能键
+	 * 
+	 * @param event
+	 * @returns {Boolean}
+	 */
+	Common.isF1ToF12 = function(event) {
+		var e = event ? event : (window.event ? window.event : null);
+		if (e.keyCode > 111 & e.keyCode < 124) {
+			return true;
+		}
+		return false;
+	};
 }());
