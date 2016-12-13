@@ -28,6 +28,7 @@
 div.search {
 	margin-bottom: 20px;
 }
+
 div.search .input-text,.select-box {
 	width: 200px;
 }
@@ -39,4 +40,11 @@ div.search .input-text,.select-box {
 
 .form .row {
 	margin-top: 23px;
+}
+
+.input-time {
+	border-radius: 4px;
+	width: 220px;
+	height: 30px;
+	background: url(../images/daterangepicker-icon.png) right no-repeat;
 }

@@ -21,7 +21,7 @@
 				url = $(this).attr("action") ? $(this).attr("action") : baseUrl + "?method=updEntity";
 			}
 			
-			//使表单内所有按键都失灵，如Tab等。防止表单变更。
+			//使表单内除F1到F12外的所有按键都失灵，如Tab等。防止表单内值变更。
 	        var readonly = function(event){
 				if(Common.isF1ToF12(event)){
 					return true;
